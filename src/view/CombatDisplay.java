@@ -13,6 +13,8 @@ public class CombatDisplay {
     private JButton button4;
     private JTextArea playerStatsTextArea;
     private JPanel combatRootPanel;
+    private JLabel playerPortraitLabel;
+    private JLabel enemyPortraitLabel;
 
     public JPanel getEnemyPortrait() {
         return enemyPortrait;
@@ -20,6 +22,14 @@ public class CombatDisplay {
 
     public JPanel getPlayerPortrait() {
         return playerPortrait;
+    }
+
+    public JLabel getPlayerPortraitLabel() {
+        return playerPortraitLabel;
+    }
+
+    public JLabel getEnemyPortraitLabel() {
+        return enemyPortraitLabel;
     }
 
     public JTextArea getCombatTextArea() {

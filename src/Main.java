@@ -1,26 +1,37 @@
 import controller.Controller;
-import model.Enemy;
-import model.Player;
+import model.*;
 import view.CombatDisplay;
 import view.Display;
+import view.MainFrame;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Main {
+
 
     public static void main(String[] args) throws IOException {
         Display display = new Display();
         CombatDisplay combatDisplay = new CombatDisplay();
+        MapOfMainLand map = new MapOfMainLand(display);
         Player player = new Player("Dugovics");
-        Enemy enemy = new Enemy("Bandit",100,1);
 
-        Controller controller = new Controller(player,enemy,display,combatDisplay);
+        ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+        enemies.add(new BeastEnemy("Wolf",25,2));
+        enemies.add(new HumanoidEnemy("Bandit",30,1));
 
-        JFrame frame = controller.initFrame();
 
-
+        Controller controller = new Controller(player,enemies,display,combatDisplay,map);
+        MainFrame frame = new MainFrame(controller,player,enemies,display,combatDisplay,map);
+        controller.initComponents(frame);
         controller.updateStats();
 
     }
+
+
 }

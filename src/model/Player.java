@@ -1,5 +1,7 @@
 package model;
 
+import java.awt.*;
+
 public class Player {
 
     private String name;
@@ -7,6 +9,7 @@ public class Player {
     private int exp;
     private double hp;
     private double dmg;
+    private Point currentLocation;
 
     public Player(String name){
         this.name = name;
@@ -14,6 +17,15 @@ public class Player {
         this.exp = 0;
         this.hp = 200;
         this.dmg = 2;
+        this.currentLocation = new Point(0,0);
+    }
+
+    public Point getCurrentLocation() {
+        return currentLocation;
+    }
+
+    public void setCurrentLocation(Point currentLocation) {
+        this.currentLocation = currentLocation;
     }
 
     public String getName() {
