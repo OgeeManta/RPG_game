@@ -1,10 +1,11 @@
 package view;
 
+
 import javax.swing.*;
 
 public class Display {
     private JPanel rootPanel;
-    private JButton button1;
+    private JButton combatBtn;
     private JTextArea stats;
     private JPanel portrait;
     private JButton button3;
@@ -12,12 +13,13 @@ public class Display {
     private JButton button2;
     private JLabel portraitLabel;
 
+
     public JPanel getRootPanel() {
         return rootPanel;
     }
 
-    public JButton getButton1() {
-        return button1;
+    public JButton getCombatBtn() {
+        return combatBtn;
     }
 
     public JTextArea getStats() {
