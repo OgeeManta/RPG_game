@@ -24,4 +24,72 @@ public class TalentDisplay {
     private void createUIComponents() {
         // TODO: place custom component creation code here
     }
+
+    public JPanel getTalentRootPanel() {
+        return talentRootPanel;
+    }
+
+    public JPanel getOffensePanel0() {
+        return offensePanel0;
+    }
+
+    public JButton getOffenseButton0() {
+        return offenseButton0;
+    }
+
+    public JPanel getDefensePanel0() {
+        return defensePanel0;
+    }
+
+    public JButton getDefenseButton0() {
+        return defenseButton0;
+    }
+
+    public JPanel getUtilityPanel0() {
+        return utilityPanel0;
+    }
+
+    public JButton getUtilityButton0() {
+        return utilityButton0;
+    }
+
+    public JPanel getDefensePanel1() {
+        return defensePanel1;
+    }
+
+    public JButton getDefenseButton1() {
+        return defenseButton1;
+    }
+
+    public JPanel getOffensePanel1() {
+        return offensePanel1;
+    }
+
+    public JButton getOffenseButton1() {
+        return offenseButton1;
+    }
+
+    public JPanel getOffensePanel2() {
+        return offensePanel2;
+    }
+
+    public JButton getOffenseButton2() {
+        return offenseButton2;
+    }
+
+    public JPanel getDefensePanel2() {
+        return defensePanel2;
+    }
+
+    public JButton getDefenseButton2() {
+        return defenseButton2;
+    }
+
+    public JPanel getUtilityPanel2() {
+        return utilityPanel2;
+    }
+
+    public JButton getUtilityButton2() {
+        return utilityButton2;
+    }
 }

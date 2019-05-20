@@ -3,6 +3,7 @@ import model.*;
 import view.CombatDisplay;
 import view.Display;
 import view.MainFrame;
+import view.TalentDisplay;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,6 +19,8 @@ public class Main {
     public static void main(String[] args) throws IOException {
         Display display = new Display();
         CombatDisplay combatDisplay = new CombatDisplay();
+        TalentDisplay talentDisplay = new TalentDisplay();
+        TalentTree talentTree = new TalentTree(talentDisplay);
         MapOfMainLand map = new MapOfMainLand(display);
         Player player = new Player("Dugovics");
 
@@ -26,7 +29,7 @@ public class Main {
         enemies.add(new HumanoidEnemy("Bandit",30,1));
 
 
-        Controller controller = new Controller(player,enemies,display,combatDisplay,map);
+        Controller controller = new Controller(player,enemies,display,combatDisplay,talentDisplay,map);
         MainFrame frame = new MainFrame(controller,player,enemies,display,combatDisplay,map);
         controller.initComponents(frame);
         controller.updateStats();

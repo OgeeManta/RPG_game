@@ -2,6 +2,8 @@ package view;
 
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Display{
     private JPanel rootPanel;
@@ -50,6 +52,10 @@ public class Display{
     private JLabel map55;
     private JPanel mapPanel;
 
+
+    public Display() {
+
+    }
 
     public JPanel getRootPanel() {
         return rootPanel;
