@@ -25,18 +25,6 @@ public class Controller{
     private ArrayList<Enemy> enemies;
     private Enemy currentEnemy;
     private MapOfMainLand map;
-/*
-    BufferedImage playerImage = ImageIO.read(new File("./resources/orc.png"));
-    Image playerImg = playerImage.getScaledInstance(combatDisplay.getPlayerPortraitLabel().getWidth(), combatDisplay.getPlayerPortraitLabel().getHeight(),
-            Image.SCALE_SMOOTH);
-    ImageIcon playerIcon = new ImageIcon(playerImg);
-
-    BufferedImage enemyImage = ImageIO.read(new File("./resources/portrait.jpg"));
-    Image enemyImg = enemyImage.getScaledInstance(combatDisplay.getEnemyPortraitLabel().getWidth(), combatDisplay.getEnemyPortraitLabel().getHeight(),
-            Image.SCALE_SMOOTH);
-    ImageIcon enemyIcon = new ImageIcon(enemyImg);
-
- */
 
     public Controller(Player player,ArrayList<Enemy> enemies,Display display,CombatDisplay combatDisplay,MapOfMainLand map){
         this.player = player;
@@ -74,7 +62,7 @@ public class Controller{
     }
 
     public void refreshMap(Point p) throws IOException {
-        BufferedImage playerImage = ImageIO.read(new File("./resources/orc.png"));
+        BufferedImage playerImage = ImageIO.read(new File("./resources/circle.png"));
         Image playerImg = playerImage.getScaledInstance(display.getPortraitLabel().getWidth(), display.getPortraitLabel().getHeight(),
                 Image.SCALE_SMOOTH);
         ImageIcon playerIcon = new ImageIcon(playerImg);
