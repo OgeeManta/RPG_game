@@ -12,6 +12,7 @@ public class Talent {
         this.name = name;
         this.toolTipText = toolTipText;
         this.unlocked = false;
+        this.value = value;
         this.level = 1;
     }
 

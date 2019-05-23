@@ -1,6 +1,7 @@
 package model;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Player {
 
@@ -9,6 +10,8 @@ public class Player {
     private int exp;
     private double hp;
     private double dmg;
+    private ArrayList<Talent> talents;
+    private int talentPoints;
     private Point currentLocation;
 
     public Player(String name){
@@ -17,7 +20,21 @@ public class Player {
         this.exp = 0;
         this.hp = 200;
         this.dmg = 2;
+        this.talents = new ArrayList<Talent>();
+        this.talentPoints = 0;
         this.currentLocation = new Point(0,0);
+    }
+
+    public int getTalentPoints() {
+        return talentPoints;
+    }
+
+    public void setTalentPoints(int talentPoints) {
+        this.talentPoints = talentPoints;
+    }
+
+    public ArrayList<Talent> getTalents() {
+        return talents;
     }
 
     public Point getCurrentLocation() {

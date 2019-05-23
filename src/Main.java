@@ -29,7 +29,7 @@ public class Main {
         enemies.add(new HumanoidEnemy("Bandit",30,1));
 
 
-        Controller controller = new Controller(player,enemies,display,combatDisplay,talentDisplay,map);
+        Controller controller = new Controller(player,enemies,talentTree.getTalentList(),display,combatDisplay,talentDisplay,map);
         MainFrame frame = new MainFrame(controller,player,enemies,display,combatDisplay,map);
         controller.initComponents(frame);
         controller.updateStats();

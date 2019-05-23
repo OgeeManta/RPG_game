@@ -25,11 +25,13 @@ public class Controller{
     private CombatDisplay combatDisplay;
     private TalentDisplay talentDisplay;
     private ArrayList<Enemy> enemies;
+    private ArrayList<Talent> talents;
     private Enemy currentEnemy;
     private MapOfMainLand map;
 
-    public Controller(Player player,ArrayList<Enemy> enemies,Display display,CombatDisplay combatDisplay,TalentDisplay talentDisplay,MapOfMainLand map){
+    public Controller(Player player,ArrayList<Enemy> enemies,ArrayList<Talent> talents,Display display,CombatDisplay combatDisplay,TalentDisplay talentDisplay,MapOfMainLand map){
         this.player = player;
+        this.talents = talents;
         this.display = display;
         this.combatDisplay = combatDisplay;
         this.talentDisplay = talentDisplay;
@@ -111,12 +113,43 @@ public class Controller{
         frame.add(talentDisplay.getTalentRootPanel());
         frame.revalidate();
 
-        BufferedImage playerImage = ImageIO.read(new File("./resources/circle.png"));
-        Image playerImg = playerImage.getScaledInstance(talentDisplay.getOffenseButton0().getWidth(), talentDisplay.getOffenseButton0().getHeight(),
+        BufferedImage Image = ImageIO.read(new File("./resources/sword.png"));
+        Image swordImg = Image.getScaledInstance(talentDisplay.getOffenseButton0().getWidth(), talentDisplay.getOffenseButton0().getHeight(),
                 Image.SCALE_SMOOTH);
-        ImageIcon playerIcon = new ImageIcon(playerImg);
+        ImageIcon swordIcon = new ImageIcon(swordImg);
 
-        talentDisplay.getOffenseButton0().setIcon(playerIcon);
+        talentDisplay.getOffenseButton0().setIcon(swordIcon);
+
+        Image = ImageIO.read(new File("./resources/dagger.png"));
+        Image daggerImg = Image.getScaledInstance(talentDisplay.getOffenseButton00().getWidth(), talentDisplay.getOffenseButton00().getHeight(),
+                Image.SCALE_SMOOTH);
+        ImageIcon daggerIcon = new ImageIcon(daggerImg);
+
+        talentDisplay.getOffenseButton00().setIcon(daggerIcon);
+
+        talentDisplay.getOffenseButton0().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(!player.getTalents().contains(talents.get(0))) {
+                    player.getTalents().add(talents.get(0));
+                }else{
+                    player.getTalents().get(0).setLevel(player.getTalents().get(0).getLevel() + 1);
+                    talentDisplay.getOffenseButton0().setToolTipText( player.getTalents().get(0).getToolTipText() + " " + player.getTalents().get(0).getLevel() * player.getTalents().get(0).getValue());
+                }
+                try {
+                    showTalentFrame(frame);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+
+        talentDisplay.getOffenseButton0().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                player.getTalents().add(talents.get(1));
+            }
+        });
 
     }
 
