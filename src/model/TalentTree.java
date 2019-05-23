@@ -15,7 +15,7 @@ public class TalentTree {
 
         talentList = new ArrayList<Talent>();
 
-        talentDisplay.getOffenseButton0().setToolTipText( damageMastery.getToolTipText() + " " + damageMastery.getLevel() * damageMastery.getValue());
+        talentDisplay.getOffenseButton0().setToolTipText(damageMastery.getToolTipText() + " " + damageMastery.getLevel() * damageMastery.getValue());
         talentList.add(damageMastery);
         talentDisplay.getOffenseButton00().setToolTipText(critMastery.getToolTipText() + " " + critMastery.getLevel() * critMastery.getValue());
         talentList.add(critMastery);

@@ -130,13 +130,13 @@ public class Controller{
         talentDisplay.getOffenseButton00().setIcon(daggerIcon);
         talentDisplay.getOffenseButton00().setDisabledIcon(daggerIcon);
 
-        Image = ImageIO.read(new File("./resources/dagger.png"));
+        Image = ImageIO.read(new File("./resources/VolskathAxe.png"));
         Image axeImg = Image.getScaledInstance(talentDisplay.getOffenseButton01().getWidth(), talentDisplay.getOffenseButton01().getHeight(),
                 Image.SCALE_SMOOTH);
         ImageIcon axeIcon = new ImageIcon(axeImg);
 
-        talentDisplay.getOffenseButton00().setIcon(axeIcon);
-        talentDisplay.getOffenseButton00().setDisabledIcon(axeIcon);
+        talentDisplay.getOffenseButton01().setIcon(axeIcon);
+        talentDisplay.getOffenseButton01().setDisabledIcon(axeIcon);
 
         refreshTalentPoints();
 
@@ -147,6 +147,8 @@ public class Controller{
             public void actionPerformed(ActionEvent e) {
                 player.getTalents().get(0).setUnlocked(true);
                 player.setTalentPoints(player.getTalentPoints() - 1);
+                player.getTalents().get(0).setLevel(player.getTalents().get(0).getLevel() + 1);
+                refreshTalentDisplay(talentDisplay.getOffenseButton0(),player.getTalents().get(0));
                 refreshTalentPoints();
                 initOffenseTalents();
                 turnOffButtonsIfNoPointsToSpend();
@@ -159,6 +161,8 @@ public class Controller{
             public void actionPerformed(ActionEvent e) {
                 player.getTalents().get(1).setUnlocked(true);
                 player.setTalentPoints(player.getTalentPoints() - 1);
+                player.getTalents().get(1).setLevel(player.getTalents().get(1).getLevel() + 1);
+                refreshTalentDisplay(talentDisplay.getOffenseButton00(),player.getTalents().get(1));
                 refreshTalentPoints();
                 initOffenseTalents();
                 turnOffButtonsIfNoPointsToSpend();
@@ -186,6 +190,10 @@ public class Controller{
             talentDisplay.getUtilityButton1().setEnabled(false);
             talentDisplay.getUtilityButton2().setEnabled(false);
         }
+    }
+
+    public void refreshTalentDisplay(JButton button,Talent talent){
+        button.setToolTipText(talent.getToolTipText() + " " + talent.getLevel() * talent.getValue());
     }
 
     public void initOffenseTalents(){
