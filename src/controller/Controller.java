@@ -120,37 +120,89 @@ public class Controller{
 
         talentDisplay.getOffenseButton0().setIcon(swordIcon);
 
+        talentDisplay.getOffenseButton0().setDisabledIcon(swordIcon);
+
         Image = ImageIO.read(new File("./resources/dagger.png"));
         Image daggerImg = Image.getScaledInstance(talentDisplay.getOffenseButton00().getWidth(), talentDisplay.getOffenseButton00().getHeight(),
                 Image.SCALE_SMOOTH);
         ImageIcon daggerIcon = new ImageIcon(daggerImg);
 
         talentDisplay.getOffenseButton00().setIcon(daggerIcon);
+        talentDisplay.getOffenseButton00().setDisabledIcon(daggerIcon);
+
+        Image = ImageIO.read(new File("./resources/dagger.png"));
+        Image axeImg = Image.getScaledInstance(talentDisplay.getOffenseButton01().getWidth(), talentDisplay.getOffenseButton01().getHeight(),
+                Image.SCALE_SMOOTH);
+        ImageIcon axeIcon = new ImageIcon(axeImg);
+
+        talentDisplay.getOffenseButton00().setIcon(axeIcon);
+        talentDisplay.getOffenseButton00().setDisabledIcon(axeIcon);
+
+        refreshTalentPoints();
+
+        initOffenseTalents();
 
         talentDisplay.getOffenseButton0().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(!player.getTalents().contains(talents.get(0))) {
-                    player.getTalents().add(talents.get(0));
-                }else{
-                    player.getTalents().get(0).setLevel(player.getTalents().get(0).getLevel() + 1);
-                    talentDisplay.getOffenseButton0().setToolTipText( player.getTalents().get(0).getToolTipText() + " " + player.getTalents().get(0).getLevel() * player.getTalents().get(0).getValue());
-                }
-                try {
-                    showTalentFrame(frame);
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
+                player.getTalents().get(0).setUnlocked(true);
+                player.setTalentPoints(player.getTalentPoints() - 1);
+                refreshTalentPoints();
+                initOffenseTalents();
+                turnOffButtonsIfNoPointsToSpend();
+                frame.revalidate();
             }
         });
 
-        talentDisplay.getOffenseButton0().addActionListener(new ActionListener() {
+        talentDisplay.getOffenseButton00().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                player.getTalents().add(talents.get(1));
+                player.getTalents().get(1).setUnlocked(true);
+                player.setTalentPoints(player.getTalentPoints() - 1);
+                refreshTalentPoints();
+                initOffenseTalents();
+                turnOffButtonsIfNoPointsToSpend();
+                frame.revalidate();
             }
         });
 
+    }
+
+    public void refreshTalentPoints(){
+        talentDisplay.getPointsToSpend().setText("Talent points: " + player.getTalentPoints());
+    }
+
+    public void turnOffButtonsIfNoPointsToSpend(){
+        if(player.getTalentPoints() == 0){
+            talentDisplay.getOffenseButton0().setEnabled(false);
+            talentDisplay.getOffenseButton00().setEnabled(false);
+            talentDisplay.getOffenseButton1().setEnabled(false);
+            talentDisplay.getOffenseButton01().setEnabled(false);
+            talentDisplay.getOffenseButton2().setEnabled(false);
+            talentDisplay.getDefenseButton0().setEnabled(false);
+            talentDisplay.getDefenseButton1().setEnabled(false);
+            talentDisplay.getDefenseButton2().setEnabled(false);
+            talentDisplay.getUtilityButton0().setEnabled(false);
+            talentDisplay.getUtilityButton1().setEnabled(false);
+            talentDisplay.getUtilityButton2().setEnabled(false);
+        }
+    }
+
+    public void initOffenseTalents(){
+
+        talentDisplay.getOffenseButton0().setEnabled(true);
+        talentDisplay.getOffenseButton00().setEnabled(true);
+
+        for(int i=0;i<player.getTalents().size();++i){
+            if(player.getTalents().get(i).isUnlocked()){
+                if(player.getTalents().get(0).isUnlocked()){
+                    talentDisplay.getOffenseButton1().setEnabled(true);
+                }
+                if(player.getTalents().get(1).isUnlocked()){
+                    talentDisplay.getOffenseButton2().setEnabled(true);
+                }
+            }
+        }
     }
 
     public void initComponents(JFrame frame) throws IOException {

@@ -21,7 +21,7 @@ public class Player {
         this.hp = 200;
         this.dmg = 2;
         this.talents = new ArrayList<Talent>();
-        this.talentPoints = 0;
+        this.talentPoints = 1;
         this.currentLocation = new Point(0,0);
     }
 
@@ -35,6 +35,10 @@ public class Player {
 
     public ArrayList<Talent> getTalents() {
         return talents;
+    }
+
+    public void setTalents(ArrayList<Talent> talents) {
+        this.talents = talents;
     }
 
     public Point getCurrentLocation() {

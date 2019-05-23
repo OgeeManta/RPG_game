@@ -16,6 +16,8 @@ public class Talent {
         this.level = 1;
     }
 
+
+
     public String getToolTipText() {
         return toolTipText;
     }

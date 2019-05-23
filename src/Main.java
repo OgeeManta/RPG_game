@@ -23,6 +23,7 @@ public class Main {
         TalentTree talentTree = new TalentTree(talentDisplay);
         MapOfMainLand map = new MapOfMainLand(display);
         Player player = new Player("Dugovics");
+        player.setTalents(talentTree.getTalentList());
 
         ArrayList<Enemy> enemies = new ArrayList<Enemy>();
         enemies.add(new BeastEnemy("Wolf",25,2));
