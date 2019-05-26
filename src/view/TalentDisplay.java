@@ -27,7 +27,6 @@ public class TalentDisplay {
     private JPanel offensePanel00;
     private JButton offenseButton00;
     private JLabel pointsToSpend;
-    private JButton backButton;
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
@@ -35,10 +34,6 @@ public class TalentDisplay {
 
     public JLabel getPointsToSpend() {
         return pointsToSpend;
-    }
-
-    public JButton getBackButton() {
-        return backButton;
     }
 
     public JPanel getUtilityPanel1() {

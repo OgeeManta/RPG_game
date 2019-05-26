@@ -10,7 +10,6 @@ public class Player {
     private int exp;
     private double hp;
     private double dmg;
-    private double crit;
     private ArrayList<Talent> talents;
     private int talentPoints;
     private Point currentLocation;
@@ -21,18 +20,9 @@ public class Player {
         this.exp = 0;
         this.hp = 200;
         this.dmg = 2;
-        this.crit = 0;
         this.talents = new ArrayList<Talent>();
         this.talentPoints = 1;
         this.currentLocation = new Point(0,0);
-    }
-
-    public double getCrit() {
-        return crit;
-    }
-
-    public void setCrit(double crit) {
-        this.crit = crit;
     }
 
     public int getTalentPoints() {
