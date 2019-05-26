@@ -49,7 +49,8 @@ public class Controller{
 
     public String getPlayerStatsString(){
         return ( "Name: " + player.getName() + "\n" +
-                 "Level: " + player.getLevel()
+                 "Level: " + player.getLevel() + "\n" +
+                 "Damage: " + player.getDmg()
                 );
     }
 
@@ -62,7 +63,8 @@ public class Controller{
 
     public void updateStats(){
         display.getStats().setText( "Name: " + player.getName() + "\n" +
-                                    "Level: " + player.getLevel()
+                                    "Level: " + player.getLevel() + "\n" +
+                                    "Damage: " + player.getDmg()
                                     );
     }
 
@@ -112,6 +114,7 @@ public class Controller{
         frame.remove(display.getRootPanel());
         frame.add(talentDisplay.getTalentRootPanel());
         frame.revalidate();
+        frame.repaint();
 
         BufferedImage Image = ImageIO.read(new File("./resources/sword.png"));
         Image swordImg = Image.getScaledInstance(talentDisplay.getOffenseButton0().getWidth(), talentDisplay.getOffenseButton0().getHeight(),
@@ -145,9 +148,12 @@ public class Controller{
         talentDisplay.getOffenseButton0().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                player.getTalents().get(0).setUnlocked(true);
-                player.setTalentPoints(player.getTalentPoints() - 1);
-                player.getTalents().get(0).setLevel(player.getTalents().get(0).getLevel() + 1);
+
+                refreshPlayerTalent(0);
+
+                //Unique modifier of talent
+                player.setDmg(player.getDmg() + player.getTalents().get(0).getValue());
+
                 refreshTalentDisplay(talentDisplay.getOffenseButton0(),player.getTalents().get(0));
                 refreshTalentPoints();
                 initOffenseTalents();
@@ -159,9 +165,10 @@ public class Controller{
         talentDisplay.getOffenseButton00().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                player.getTalents().get(1).setUnlocked(true);
-                player.setTalentPoints(player.getTalentPoints() - 1);
-                player.getTalents().get(1).setLevel(player.getTalents().get(1).getLevel() + 1);
+                refreshPlayerTalent(1);
+
+                player.setCrit(player.getCrit() + player.getTalents().get(1).getValue());
+
                 refreshTalentDisplay(talentDisplay.getOffenseButton00(),player.getTalents().get(1));
                 refreshTalentPoints();
                 initOffenseTalents();
@@ -170,6 +177,26 @@ public class Controller{
             }
         });
 
+        talentDisplay.getBackButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.remove(talentDisplay.getTalentRootPanel());
+                try {
+                    initComponents(frame);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+
+            }
+        });
+
+    }
+
+    public void refreshPlayerTalent(int index){
+        player.getTalents().get(index).setUnlocked(true);
+        player.setTalentPoints(player.getTalentPoints() - 1);
+        player.getTalents().get(index).setLevel(player.getTalents().get(index).getLevel() + 1);
+        player.getTalents().get(index).setValue(player.getTalents().get(index).getValue());
     }
 
     public void refreshTalentPoints(){
@@ -177,7 +204,7 @@ public class Controller{
     }
 
     public void turnOffButtonsIfNoPointsToSpend(){
-        if(player.getTalentPoints() == 0){
+        if(player.getTalentPoints() <= 0){
             talentDisplay.getOffenseButton0().setEnabled(false);
             talentDisplay.getOffenseButton00().setEnabled(false);
             talentDisplay.getOffenseButton1().setEnabled(false);
@@ -193,7 +220,7 @@ public class Controller{
     }
 
     public void refreshTalentDisplay(JButton button,Talent talent){
-        button.setToolTipText(talent.getToolTipText() + " " + talent.getLevel() * talent.getValue());
+        button.setToolTipText(talent.getToolTipText() + " " + talent.getValue());
     }
 
     public void initOffenseTalents(){
@@ -215,12 +242,18 @@ public class Controller{
 
     public void initComponents(JFrame frame) throws IOException {
 
+        frame.add(display.getRootPanel());
+        frame.revalidate();
+        frame.repaint();
+
         BufferedImage playerImage = ImageIO.read(new File("./resources/orc.png"));
         Image playerImg = playerImage.getScaledInstance(display.getPortraitLabel().getWidth(), display.getPortraitLabel().getHeight(),
                 Image.SCALE_SMOOTH);
         ImageIcon playerIcon = new ImageIcon(playerImg);
 
         display.getPortraitLabel().setIcon(playerIcon);
+
+        updateStats();
 
         display.getCombatBtn().addActionListener(new ActionListener() {
             @Override

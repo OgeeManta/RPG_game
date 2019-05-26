@@ -33,7 +33,6 @@ public class Main {
         Controller controller = new Controller(player,enemies,talentTree.getTalentList(),display,combatDisplay,talentDisplay,map);
         MainFrame frame = new MainFrame(controller,player,enemies,display,combatDisplay,map);
         controller.initComponents(frame);
-        controller.updateStats();
 
     }
 
