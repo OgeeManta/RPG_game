@@ -5,11 +5,30 @@ public class Enemy {
     private  String name;
     private int hp;
     private int dmg;
+    private int expWorth;
 
-    public Enemy(String name,int hp,int dmg){
+    public Enemy(String name,int hp,int dmg,int expWorth){
         this.name = name;
         this.hp = hp;
         this.dmg = dmg;
+        this.expWorth = expWorth;
+    }
+
+    public String getStats(){
+
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("Name: " + name + "\n" +
+                "Hp: " + hp + "\n" +
+                "Damage: " + dmg + "\n");
+
+        String string = sb.toString();
+
+        return string;
+    }
+
+    public int getExpWorth() {
+        return expWorth;
     }
 
     public String getName() {

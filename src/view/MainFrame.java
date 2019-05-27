@@ -23,18 +23,24 @@ public class MainFrame extends JFrame implements KeyListener {
 
     private Display display;
     private CombatDisplay combatDisplay;
+    private CharacterDisplay characterDisplay;
+
+    public static boolean onMapDisplay;
+
     private Player player;
     private MapOfMainLand map;
     private Controller controller;
     private ArrayList<Enemy> enemies;
 
-    public MainFrame(Controller controller, Player player, ArrayList<Enemy> enemies,Display display,CombatDisplay combatDisplay,MapOfMainLand map) throws IOException {
+    public MainFrame(Controller controller, Player player, ArrayList<Enemy> enemies,Display display,CombatDisplay combatDisplay, CharacterDisplay characterDisplay,MapOfMainLand map) throws IOException {
         this.display = display;
         this.combatDisplay = combatDisplay;
+        this.characterDisplay = characterDisplay;
         this.player = player;
         this.map = map;
         this.controller = controller;
         this.enemies = enemies;
+        this.onMapDisplay = true;
 
         addKeyListener(this);
         setFocusable(true);
@@ -49,6 +55,9 @@ public class MainFrame extends JFrame implements KeyListener {
         display.getStats().setEditable(false);
     }
 
+
+
+
     @Override
     public void keyTyped(KeyEvent e) {
 
@@ -59,11 +68,12 @@ public class MainFrame extends JFrame implements KeyListener {
         int keyCode = e.getKeyCode();
         if(keyCode == KeyEvent.VK_LEFT){
             System.out.println("Left key pressed!");
-            if( player.getCurrentLocation().getY() != 0) {
+            if( player.getCurrentLocation().getY() != 0 && this.onMapDisplay == true) {
                 controller.clearMap(player.getCurrentLocation());
                 player.getCurrentLocation().setLocation(player.getCurrentLocation().getX(), player.getCurrentLocation().getY() - 1);
                 try {
                     controller.refreshMap(player.getCurrentLocation());
+                    combatEncounter();
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
@@ -71,11 +81,12 @@ public class MainFrame extends JFrame implements KeyListener {
         }
         if(keyCode == KeyEvent.VK_RIGHT){
             System.out.println("Right key pressed!");
-            if(player.getCurrentLocation().getY() != 5) {
+            if(player.getCurrentLocation().getY() != 5 && this.onMapDisplay == true) {
                 controller.clearMap(player.getCurrentLocation());
                 player.getCurrentLocation().setLocation(player.getCurrentLocation().getX(), player.getCurrentLocation().getY() + 1);
                 try {
                     controller.refreshMap(player.getCurrentLocation());
+                    combatEncounter();
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
@@ -83,11 +94,12 @@ public class MainFrame extends JFrame implements KeyListener {
         }
         if(keyCode == KeyEvent.VK_DOWN){
             System.out.println("Down key pressed!");
-            if(player.getCurrentLocation().getX() != 5) {
+            if(player.getCurrentLocation().getX() != 5 && this.onMapDisplay == true) {
                 controller.clearMap(player.getCurrentLocation());
                 player.getCurrentLocation().setLocation(player.getCurrentLocation().getX() + 1, player.getCurrentLocation().getY());
                 try {
                     controller.refreshMap(player.getCurrentLocation());
+                    combatEncounter();
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
@@ -95,11 +107,12 @@ public class MainFrame extends JFrame implements KeyListener {
         }
         if(keyCode == KeyEvent.VK_UP){
             System.out.println("Up key pressed!");
-            if( player.getCurrentLocation().getX() != 0) {
+            if( player.getCurrentLocation().getX() != 0 && this.onMapDisplay == true) {
                 controller.clearMap(player.getCurrentLocation());
                 player.getCurrentLocation().setLocation(player.getCurrentLocation().getX() - 1, player.getCurrentLocation().getY());
                 try {
                     controller.refreshMap(player.getCurrentLocation());
+                    combatEncounter();
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
@@ -107,8 +120,19 @@ public class MainFrame extends JFrame implements KeyListener {
         }
     }
 
+
     @Override
     public void keyReleased(KeyEvent e) {
 
+    }
+
+    public void combatEncounter() throws IOException {
+        if(player.getCanCombat() == true){
+            if(Math.random() < 0.3) {
+                Random random = new Random();
+                controller.setCurrentEnemy(enemies.get(random.nextInt(enemies.size())));
+                controller.combat(this, player, controller.getCurrentEnemy());
+            }
+        }
     }
 }

@@ -1,9 +1,6 @@
 import controller.Controller;
 import model.*;
-import view.CombatDisplay;
-import view.Display;
-import view.MainFrame;
-import view.TalentDisplay;
+import view.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,18 +17,19 @@ public class Main {
         Display display = new Display();
         CombatDisplay combatDisplay = new CombatDisplay();
         TalentDisplay talentDisplay = new TalentDisplay();
+        CharacterDisplay characterDisplay = new CharacterDisplay();
         TalentTree talentTree = new TalentTree(talentDisplay);
         MapOfMainLand map = new MapOfMainLand(display);
         Player player = new Player("Dugovics");
         player.setTalents(talentTree.getTalentList());
 
         ArrayList<Enemy> enemies = new ArrayList<Enemy>();
-        enemies.add(new BeastEnemy("Wolf",25,2));
-        enemies.add(new HumanoidEnemy("Bandit",30,1));
+        enemies.add(new BeastEnemy("Wolf",25,2,10));
+        enemies.add(new HumanoidEnemy("Bandit",30,1,15));
 
 
-        Controller controller = new Controller(player,enemies,talentTree.getTalentList(),display,combatDisplay,talentDisplay,map);
-        MainFrame frame = new MainFrame(controller,player,enemies,display,combatDisplay,map);
+        Controller controller = new Controller(player,enemies,talentTree.getTalentList(),display,combatDisplay,talentDisplay,characterDisplay,map);
+        MainFrame frame = new MainFrame(controller,player,enemies,display,combatDisplay,characterDisplay,map);
         controller.initComponents(frame);
         controller.updateStats();
 

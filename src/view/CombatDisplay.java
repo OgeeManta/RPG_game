@@ -6,15 +6,20 @@ public class CombatDisplay {
     private JPanel enemyPortrait;
     private JPanel playerPortrait;
     private JTextArea combatTextArea;
-    private JButton button1;
-    private JButton button2;
-    private JButton button3;
+    private JButton runButton;
+    private JButton itemsButton;
+    private JButton skillsButton;
     private JTextArea enemyStatsTextArea;
-    private JButton button4;
+    private JButton attackButton;
     private JTextArea playerStatsTextArea;
     private JPanel combatRootPanel;
     private JLabel playerPortraitLabel;
     private JLabel enemyPortraitLabel;
+    private JButton endCombatButton;
+
+    public JButton getEndCombatButton() {
+        return endCombatButton;
+    }
 
     public JPanel getEnemyPortrait() {
         return enemyPortrait;
@@ -36,24 +41,24 @@ public class CombatDisplay {
         return combatTextArea;
     }
 
-    public JButton getButton1() {
-        return button1;
+    public JButton getRunButton() {
+        return runButton;
     }
 
-    public JButton getButton2() {
-        return button2;
+    public JButton getItemsButton() {
+        return itemsButton;
     }
 
-    public JButton getButton3() {
-        return button3;
+    public JButton getSkillsButton() {
+        return skillsButton;
     }
 
     public JTextArea getEnemyStatsTextArea() {
         return enemyStatsTextArea;
     }
 
-    public JButton getButton4() {
-        return button4;
+    public JButton getAttackButton() {
+        return attackButton;
     }
 
     public JTextArea getPlayerStatsTextArea() {

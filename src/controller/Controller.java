@@ -1,9 +1,7 @@
 package controller;
 
 import model.*;
-import view.CombatDisplay;
-import view.Display;
-import view.TalentDisplay;
+import view.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -24,17 +22,19 @@ public class Controller{
     private Display display;
     private CombatDisplay combatDisplay;
     private TalentDisplay talentDisplay;
+    private CharacterDisplay characterDisplay;
     private ArrayList<Enemy> enemies;
     private ArrayList<Talent> talents;
     private Enemy currentEnemy;
     private MapOfMainLand map;
 
-    public Controller(Player player,ArrayList<Enemy> enemies,ArrayList<Talent> talents,Display display,CombatDisplay combatDisplay,TalentDisplay talentDisplay,MapOfMainLand map){
+    public Controller(Player player,ArrayList<Enemy> enemies,ArrayList<Talent> talents,Display display,CombatDisplay combatDisplay,TalentDisplay talentDisplay, CharacterDisplay characterDisplay, MapOfMainLand map){
         this.player = player;
         this.talents = talents;
         this.display = display;
         this.combatDisplay = combatDisplay;
         this.talentDisplay = talentDisplay;
+        this.characterDisplay = characterDisplay;
         this.enemies = enemies;
         this.map = map;
     }
@@ -47,19 +47,6 @@ public class Controller{
         this.currentEnemy = currentEnemy;
     }
 
-    public String getPlayerStatsString(){
-        return ( "Name: " + player.getName() + "\n" +
-                 "Level: " + player.getLevel()
-                );
-    }
-
-    public String getEnemyStatsString(){
-        return (  currentEnemy.getName() + "\n" +
-                 "Hp: " + currentEnemy.getHp() + "\n" +
-                 "Damage: " + currentEnemy.getDmg()
-        );
-    }
-
     public void updateStats(){
         display.getStats().setText( "Name: " + player.getName() + "\n" +
                                     "Level: " + player.getLevel()
@@ -67,7 +54,7 @@ public class Controller{
     }
 
     public void refreshMap(Point p) throws IOException {
-        BufferedImage playerImage = ImageIO.read(new File("./resources/circle.png"));
+        BufferedImage playerImage = ImageIO.read(new File("./resources/orc.png"));
         Image playerImg = playerImage.getScaledInstance(display.getPortraitLabel().getWidth(), display.getPortraitLabel().getHeight(),
                 Image.SCALE_SMOOTH);
         ImageIcon playerIcon = new ImageIcon(playerImg);
@@ -79,9 +66,12 @@ public class Controller{
     }
 
     public  void combat(JFrame frame,Player player,Enemy enemy) throws IOException {
-        frame.remove(display.getRootPanel());
-        frame.add(combatDisplay.getCombatRootPanel());
+        MainFrame.onMapDisplay = false;
+        combatDisplay.getEndCombatButton().setEnabled(false);
+        frame.getContentPane().remove(display.getRootPanel());
+        frame.getContentPane().add(combatDisplay.getCombatRootPanel());
         frame.revalidate();
+        frame.repaint();
 
         BufferedImage playerImage = ImageIO.read(new File("./resources/orc.png"));
         Image playerImg = playerImage.getScaledInstance(combatDisplay.getPlayerPortraitLabel().getWidth(), combatDisplay.getPlayerPortraitLabel().getHeight(),
@@ -96,9 +86,9 @@ public class Controller{
         combatDisplay.getPlayerPortraitLabel().setIcon(playerIcon);
         combatDisplay.getEnemyPortraitLabel().setIcon(enemyIcon);
 
-        combatDisplay.getPlayerStatsTextArea().setText(getPlayerStatsString());
+        combatDisplay.getPlayerStatsTextArea().setText(player.getStats());
         combatDisplay.getPlayerStatsTextArea().setEditable(false);
-        combatDisplay.getEnemyStatsTextArea().setText(getEnemyStatsString());
+        combatDisplay.getEnemyStatsTextArea().setText(getCurrentEnemy().getStats());
         combatDisplay.getEnemyStatsTextArea().setEditable(false);
 
         combatDisplay.getCombatTextArea().setText("You have encountered " + enemy.getName() + "!");
@@ -106,12 +96,17 @@ public class Controller{
 
 
 
+
+
     }
 
     public void showTalentFrame(JFrame frame) throws IOException {
-        frame.remove(display.getRootPanel());
-        frame.add(talentDisplay.getTalentRootPanel());
+
+        MainFrame.onMapDisplay = false;
+        frame.getContentPane().remove(display.getRootPanel());
+        frame.getContentPane().add(talentDisplay.getTalentRootPanel());
         frame.revalidate();
+        frame.repaint();
 
         BufferedImage Image = ImageIO.read(new File("./resources/sword.png"));
         Image swordImg = Image.getScaledInstance(talentDisplay.getOffenseButton0().getWidth(), talentDisplay.getOffenseButton0().getHeight(),
@@ -142,34 +137,20 @@ public class Controller{
 
         initOffenseTalents();
 
-        talentDisplay.getOffenseButton0().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                player.getTalents().get(0).setUnlocked(true);
-                player.setTalentPoints(player.getTalentPoints() - 1);
-                player.getTalents().get(0).setLevel(player.getTalents().get(0).getLevel() + 1);
-                refreshTalentDisplay(talentDisplay.getOffenseButton0(),player.getTalents().get(0));
-                refreshTalentPoints();
-                initOffenseTalents();
-                turnOffButtonsIfNoPointsToSpend();
-                frame.revalidate();
-            }
-        });
+        turnOffButtonsIfNoPointsToSpend();
 
-        talentDisplay.getOffenseButton00().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                player.getTalents().get(1).setUnlocked(true);
-                player.setTalentPoints(player.getTalentPoints() - 1);
-                player.getTalents().get(1).setLevel(player.getTalents().get(1).getLevel() + 1);
-                refreshTalentDisplay(talentDisplay.getOffenseButton00(),player.getTalents().get(1));
-                refreshTalentPoints();
-                initOffenseTalents();
-                turnOffButtonsIfNoPointsToSpend();
-                frame.revalidate();
-            }
-        });
 
+
+    }
+
+    public void clickedTalent(JFrame frame, int index){
+        if(player.getTalentPoints() > 0) {
+            player.getTalents().get(index).setUnlocked(true);
+            player.spendTalentPoint();
+            player.getTalents().get(index).setLevel(player.getTalents().get(index).getLevel() + 1);
+        }else{
+            JOptionPane.showMessageDialog(frame,"You've no talent points to spend!");
+        }
     }
 
     public void refreshTalentPoints(){
@@ -177,7 +158,7 @@ public class Controller{
     }
 
     public void turnOffButtonsIfNoPointsToSpend(){
-        if(player.getTalentPoints() == 0){
+        if(player.getTalentPoints() <= 0){
             talentDisplay.getOffenseButton0().setEnabled(false);
             talentDisplay.getOffenseButton00().setEnabled(false);
             talentDisplay.getOffenseButton1().setEnabled(false);
@@ -192,8 +173,14 @@ public class Controller{
         }
     }
 
-    public void refreshTalentDisplay(JButton button,Talent talent){
-        button.setToolTipText(talent.getToolTipText() + " " + talent.getLevel() * talent.getValue());
+    public void refreshTalentDisplay(JButton button,Talent talent,int nextLevel){
+        StringBuilder sb = new StringBuilder();
+        sb.append(talent.getToolTipText());
+        int previousLevel = talent.getValue();
+        talent.setValue(talent.getValue() + nextLevel);
+        talent.setToolTipText(talent.getToolTipText() + previousLevel + " --> " + talent.getValue());
+        button.setToolTipText(talent.getToolTipText());
+        talent.setToolTipText(sb.toString());
     }
 
     public void initOffenseTalents(){
@@ -213,6 +200,25 @@ public class Controller{
         }
     }
 
+    public void showCharacterFrame(JFrame frame) throws IOException {
+
+        MainFrame.onMapDisplay = false;
+        frame.getContentPane().remove(display.getRootPanel());
+        frame.getContentPane().add(characterDisplay.getCharRootPanel());
+        frame.revalidate();
+        frame.repaint();
+
+        BufferedImage playerImage = ImageIO.read(new File("./resources/orc.png"));
+        Image playerImg = playerImage.getScaledInstance(display.getPortraitLabel().getWidth(), display.getPortraitLabel().getHeight(),
+                Image.SCALE_SMOOTH);
+        ImageIcon playerIcon = new ImageIcon(playerImg);
+
+        characterDisplay.getPortraitLabel().setIcon(playerIcon);
+
+        characterDisplay.getStats().setText(player.getStats());
+
+    }
+
     public void initComponents(JFrame frame) throws IOException {
 
         BufferedImage playerImage = ImageIO.read(new File("./resources/orc.png"));
@@ -220,15 +226,15 @@ public class Controller{
                 Image.SCALE_SMOOTH);
         ImageIcon playerIcon = new ImageIcon(playerImg);
 
+        refreshMap(player.getCurrentLocation());
+
         display.getPortraitLabel().setIcon(playerIcon);
 
-        display.getCombatBtn().addActionListener(new ActionListener() {
+        display.getButton4().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    Random random = new Random();
-                    setCurrentEnemy(enemies.get(random.nextInt(enemies.size())));
-                    combat(frame, player, currentEnemy);
+                    showCharacterFrame(frame);
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
@@ -245,5 +251,84 @@ public class Controller{
                 }
             }
         });
+
+        talentDisplay.getOffenseButton0().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                clickedTalent(frame,0);
+                player.decreaseDamage(player.getTalents().get(0).getValue());
+                refreshTalentDisplay(talentDisplay.getOffenseButton0(),player.getTalents().get(0),2);
+                player.increaseDamage(player.getTalents().get(0).getValue());
+                refreshTalentPoints();
+                initOffenseTalents();
+                turnOffButtonsIfNoPointsToSpend();
+            }
+        });
+
+        talentDisplay.getOffenseButton00().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                clickedTalent(frame,1);
+                refreshTalentDisplay(talentDisplay.getOffenseButton00(),player.getTalents().get(1),1);
+                refreshTalentPoints();
+                initOffenseTalents();
+                turnOffButtonsIfNoPointsToSpend();
+            }
+        });
+
+        talentDisplay.getBackButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MainFrame.onMapDisplay = true;
+                frame.getContentPane().remove(talentDisplay.getTalentRootPanel());
+                frame.getContentPane().add(display.getRootPanel());
+                frame.revalidate();
+                frame.repaint();
+            }
+        });
+
+        characterDisplay.getBackButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MainFrame.onMapDisplay = true;
+                frame.getContentPane().remove(characterDisplay.getCharRootPanel());
+                frame.getContentPane().add(display.getRootPanel());
+                frame.revalidate();
+                frame.repaint();
+            }
+        });
+
+        combatDisplay.getAttackButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(getCurrentEnemy().getHp() - player.getDmg() > 0){
+                    String output = player.attackEnemy(getCurrentEnemy());
+                    combatDisplay.getCombatTextArea().setText(output);
+                    combatDisplay.getPlayerStatsTextArea().setText(player.getStats());
+                    combatDisplay.getEnemyStatsTextArea().setText(getCurrentEnemy().getStats());
+                }else{
+                    StringBuilder sb = new StringBuilder();
+                    sb.append("You have defeated the enemy.\nYou received ");
+                    sb.append(getCurrentEnemy().getExpWorth() + " experience points.");
+                    combatDisplay.getCombatTextArea().setText(sb.toString());
+                    player.setCurrExp(player.getCurrExp() + getCurrentEnemy().getExpWorth());
+                    getCurrentEnemy().setHp(0);
+                    combatDisplay.getEnemyStatsTextArea().setText(getCurrentEnemy().getStats());
+                    combatDisplay.getEndCombatButton().setEnabled(true);
+                }
+            }
+        });
+
+        combatDisplay.getEndCombatButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MainFrame.onMapDisplay = true;
+                frame.getContentPane().remove(combatDisplay.getCombatRootPanel());
+                frame.getContentPane().add(display.getRootPanel());
+                frame.revalidate();
+                frame.repaint();
+            }
+        });
+
     }
 }
