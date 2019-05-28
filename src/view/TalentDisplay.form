@@ -26,6 +26,7 @@
             </constraints>
             <properties>
               <enabled value="false"/>
+              <margin top="1" left="1" bottom="1" right="1"/>
               <text value=""/>
             </properties>
           </component>

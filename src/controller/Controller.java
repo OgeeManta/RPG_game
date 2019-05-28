@@ -27,6 +27,7 @@ public class Controller{
     private ArrayList<Talent> talents;
     private Enemy currentEnemy;
     private MapOfMainLand map;
+    private Enemy tmpEnemy;
 
     public Controller(Player player,ArrayList<Enemy> enemies,ArrayList<Talent> talents,Display display,CombatDisplay combatDisplay,TalentDisplay talentDisplay, CharacterDisplay characterDisplay, MapOfMainLand map){
         this.player = player;
@@ -67,6 +68,7 @@ public class Controller{
 
     public  void combat(JFrame frame,Player player,Enemy enemy) throws IOException {
         MainFrame.onMapDisplay = false;
+        tmpEnemy = new Enemy(getCurrentEnemy());
         combatDisplay.getEndCombatButton().setEnabled(false);
         frame.getContentPane().remove(display.getRootPanel());
         frame.getContentPane().add(combatDisplay.getCombatRootPanel());
@@ -78,7 +80,7 @@ public class Controller{
                 Image.SCALE_SMOOTH);
         ImageIcon playerIcon = new ImageIcon(playerImg);
 
-        BufferedImage enemyImage = ImageIO.read(new File("./resources/portrait.jpg"));
+        BufferedImage enemyImage = ImageIO.read(new File(getCurrentEnemy().getIconPath()));
         Image enemyImg = enemyImage.getScaledInstance(combatDisplay.getEnemyPortraitLabel().getWidth(), combatDisplay.getEnemyPortraitLabel().getHeight(),
                 Image.SCALE_SMOOTH);
         ImageIcon enemyIcon = new ImageIcon(enemyImg);
@@ -108,30 +110,15 @@ public class Controller{
         frame.revalidate();
         frame.repaint();
 
-        BufferedImage Image = ImageIO.read(new File("./resources/sword.png"));
-        Image swordImg = Image.getScaledInstance(talentDisplay.getOffenseButton0().getWidth(), talentDisplay.getOffenseButton0().getHeight(),
-                Image.SCALE_SMOOTH);
-        ImageIcon swordIcon = new ImageIcon(swordImg);
+        initIcon("./resources/icons/icon.4_87.png",talentDisplay.getOffenseButton0());
 
-        talentDisplay.getOffenseButton0().setIcon(swordIcon);
+        initIcon("./resources/icons/icon.1_36.png",talentDisplay.getOffenseButton00());
 
-        talentDisplay.getOffenseButton0().setDisabledIcon(swordIcon);
+        initIcon("./resources/icons/icons8_79.png",talentDisplay.getOffenseButton1());
 
-        Image = ImageIO.read(new File("./resources/dagger.png"));
-        Image daggerImg = Image.getScaledInstance(talentDisplay.getOffenseButton00().getWidth(), talentDisplay.getOffenseButton00().getHeight(),
-                Image.SCALE_SMOOTH);
-        ImageIcon daggerIcon = new ImageIcon(daggerImg);
+        initIcon("./resources/icons/icon.1_68.png",talentDisplay.getOffenseButton01());
 
-        talentDisplay.getOffenseButton00().setIcon(daggerIcon);
-        talentDisplay.getOffenseButton00().setDisabledIcon(daggerIcon);
-
-        Image = ImageIO.read(new File("./resources/VolskathAxe.png"));
-        Image axeImg = Image.getScaledInstance(talentDisplay.getOffenseButton01().getWidth(), talentDisplay.getOffenseButton01().getHeight(),
-                Image.SCALE_SMOOTH);
-        ImageIcon axeIcon = new ImageIcon(axeImg);
-
-        talentDisplay.getOffenseButton01().setIcon(axeIcon);
-        talentDisplay.getOffenseButton01().setDisabledIcon(axeIcon);
+        initIcon("./resources/icons/icon.2_23.png",talentDisplay.getOffenseButton2());
 
         refreshTalentPoints();
 
@@ -141,6 +128,26 @@ public class Controller{
 
 
 
+    }
+
+    public void initIcon(String path,JButton button) throws IOException {
+
+        BufferedImage Image = ImageIO.read(new File(path));
+        Image img = Image.getScaledInstance(button.getWidth(), button.getHeight(),
+                Image.SCALE_SMOOTH);
+        ImageIcon icon = new ImageIcon(img);
+
+        button.setIcon(icon);
+    }
+
+    public void initUnlockedIcon(String path,JButton button) throws IOException {
+
+        BufferedImage Image = ImageIO.read(new File(path));
+        Image img = Image.getScaledInstance(button.getWidth(), button.getHeight(),
+                Image.SCALE_SMOOTH);
+        ImageIcon icon = new ImageIcon(img);
+
+        button.setDisabledIcon(icon);
     }
 
     public void clickedTalent(JFrame frame, int index){
@@ -183,7 +190,7 @@ public class Controller{
         talent.setToolTipText(sb.toString());
     }
 
-    public void initOffenseTalents(){
+    public void initOffenseTalents() throws IOException {
 
         talentDisplay.getOffenseButton0().setEnabled(true);
         talentDisplay.getOffenseButton00().setEnabled(true);
@@ -191,10 +198,24 @@ public class Controller{
         for(int i=0;i<player.getTalents().size();++i){
             if(player.getTalents().get(i).isUnlocked()){
                 if(player.getTalents().get(0).isUnlocked()){
+                    initUnlockedIcon("./resources/icons/icon.4_87.png",talentDisplay.getOffenseButton0());
                     talentDisplay.getOffenseButton1().setEnabled(true);
                 }
                 if(player.getTalents().get(1).isUnlocked()){
+                    initUnlockedIcon("./resources/icons/icon.1_36.png",talentDisplay.getOffenseButton00());
+                    talentDisplay.getOffenseButton01().setEnabled(true);
+                }
+                if(player.getTalents().get(2).isUnlocked()){
+                    initUnlockedIcon("./resources/icons/icons8_79.png",talentDisplay.getOffenseButton1());
+                }
+                if(player.getTalents().get(3).isUnlocked()){
+                    initUnlockedIcon("./resources/icons/icon.1_68.png",talentDisplay.getOffenseButton01());
+                }
+                if(player.getTalents().get(2).isUnlocked() && player.getTalents().get(3).isUnlocked()){
                     talentDisplay.getOffenseButton2().setEnabled(true);
+                }
+                if(player.getTalents().get(4).isUnlocked()){
+                    initUnlockedIcon("./resources/icons/icon.2_23.png",talentDisplay.getOffenseButton2());
                 }
             }
         }
@@ -260,7 +281,11 @@ public class Controller{
                 refreshTalentDisplay(talentDisplay.getOffenseButton0(),player.getTalents().get(0),2);
                 player.increaseDamage(player.getTalents().get(0).getValue());
                 refreshTalentPoints();
-                initOffenseTalents();
+                try {
+                    initOffenseTalents();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
                 turnOffButtonsIfNoPointsToSpend();
             }
         });
@@ -271,7 +296,56 @@ public class Controller{
                 clickedTalent(frame,1);
                 refreshTalentDisplay(talentDisplay.getOffenseButton00(),player.getTalents().get(1),1);
                 refreshTalentPoints();
-                initOffenseTalents();
+                try {
+                    initOffenseTalents();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+                turnOffButtonsIfNoPointsToSpend();
+            }
+        });
+
+        talentDisplay.getOffenseButton1().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                clickedTalent(frame,2);
+                refreshTalentDisplay(talentDisplay.getOffenseButton1(),player.getTalents().get(2),5);
+                refreshTalentPoints();
+                try {
+                    initOffenseTalents();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+                turnOffButtonsIfNoPointsToSpend();
+            }
+        });
+
+        talentDisplay.getOffenseButton01().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                clickedTalent(frame,3);
+                refreshTalentDisplay(talentDisplay.getOffenseButton01(),player.getTalents().get(3),3);
+                refreshTalentPoints();
+                try {
+                    initOffenseTalents();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+                turnOffButtonsIfNoPointsToSpend();
+            }
+        });
+
+        talentDisplay.getOffenseButton2().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                clickedTalent(frame,4);
+                refreshTalentDisplay(talentDisplay.getOffenseButton2(),player.getTalents().get(4),1);
+                refreshTalentPoints();
+                try {
+                    initOffenseTalents();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
                 turnOffButtonsIfNoPointsToSpend();
             }
         });
@@ -323,6 +397,8 @@ public class Controller{
             @Override
             public void actionPerformed(ActionEvent e) {
                 MainFrame.onMapDisplay = true;
+                enemies.remove(getCurrentEnemy());
+                enemies.add(tmpEnemy);
                 frame.getContentPane().remove(combatDisplay.getCombatRootPanel());
                 frame.getContentPane().add(display.getRootPanel());
                 frame.revalidate();

@@ -24,8 +24,8 @@ public class Main {
         player.setTalents(talentTree.getTalentList());
 
         ArrayList<Enemy> enemies = new ArrayList<Enemy>();
-        enemies.add(new BeastEnemy("Wolf",25,2,10));
-        enemies.add(new HumanoidEnemy("Bandit",30,1,15));
+        enemies.add(new BeastEnemy("Goblin",25,2,10,"./resources/goblinWorker.png"));
+        enemies.add(new HumanoidEnemy("Bandit",30,1,15,"./resources/thug.png"));
 
 
         Controller controller = new Controller(player,enemies,talentTree.getTalentList(),display,combatDisplay,talentDisplay,characterDisplay,map);

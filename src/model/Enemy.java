@@ -1,17 +1,36 @@
 package model;
 
+import view.CombatDisplay;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
 public class Enemy {
 
-    private  String name;
+    private String name;
+    private String iconPath;
     private int hp;
     private int dmg;
     private int expWorth;
 
-    public Enemy(String name,int hp,int dmg,int expWorth){
+    public Enemy(String name,int hp,int dmg,int expWorth,String iconPath) throws IOException {
         this.name = name;
         this.hp = hp;
         this.dmg = dmg;
         this.expWorth = expWorth;
+        this.iconPath = iconPath;
+    }
+
+    public Enemy(Enemy enemy){
+        this.name = enemy.getName();
+        this.hp = enemy.getHp();
+        this.dmg = enemy.getDmg();
+        this.expWorth = enemy.getExpWorth();
+        this.iconPath = enemy.getIconPath();
     }
 
     public String getStats(){
@@ -25,6 +44,10 @@ public class Enemy {
         String string = sb.toString();
 
         return string;
+    }
+
+    public String getIconPath() {
+        return iconPath;
     }
 
     public int getExpWorth() {
