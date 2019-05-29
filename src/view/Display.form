@@ -98,9 +98,9 @@
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <minimum-size width="50" height="50"/>
-                <preferred-size width="50" height="50"/>
-                <maximum-size width="50" height="50"/>
+                <minimum-size width="80" height="80"/>
+                <preferred-size width="80" height="80"/>
+                <maximum-size width="80" height="80"/>
               </grid>
             </constraints>
             <properties/>
@@ -108,7 +108,11 @@
             <children>
               <component id="62b" class="javax.swing.JLabel" binding="map00">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                    <minimum-size width="80" height="80"/>
+                    <preferred-size width="80" height="80"/>
+                    <maximum-size width="80" height="80"/>
+                  </grid>
                 </constraints>
                 <properties>
                   <text value=""/>
@@ -120,9 +124,9 @@
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <minimum-size width="50" height="50"/>
-                <preferred-size width="50" height="50"/>
-                <maximum-size width="50" height="50"/>
+                <minimum-size width="80" height="80"/>
+                <preferred-size width="80" height="80"/>
+                <maximum-size width="80" height="80"/>
               </grid>
             </constraints>
             <properties/>
@@ -130,7 +134,11 @@
             <children>
               <component id="8aa94" class="javax.swing.JLabel" binding="map01">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                    <minimum-size width="80" height="80"/>
+                    <preferred-size width="80" height="80"/>
+                    <maximum-size width="80" height="80"/>
+                  </grid>
                 </constraints>
                 <properties>
                   <text value=""/>
@@ -142,9 +150,9 @@
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <minimum-size width="50" height="50"/>
-                <preferred-size width="50" height="50"/>
-                <maximum-size width="50" height="50"/>
+                <minimum-size width="80" height="80"/>
+                <preferred-size width="80" height="80"/>
+                <maximum-size width="80" height="80"/>
               </grid>
             </constraints>
             <properties/>
@@ -152,7 +160,11 @@
             <children>
               <component id="30b8f" class="javax.swing.JLabel" binding="map02">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                    <minimum-size width="80" height="80"/>
+                    <preferred-size width="80" height="80"/>
+                    <maximum-size width="80" height="80"/>
+                  </grid>
                 </constraints>
                 <properties>
                   <text value=""/>
@@ -164,9 +176,9 @@
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <minimum-size width="50" height="50"/>
-                <preferred-size width="50" height="50"/>
-                <maximum-size width="50" height="50"/>
+                <minimum-size width="80" height="80"/>
+                <preferred-size width="80" height="80"/>
+                <maximum-size width="80" height="80"/>
               </grid>
             </constraints>
             <properties/>
@@ -174,7 +186,11 @@
             <children>
               <component id="57882" class="javax.swing.JLabel" binding="map03">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                    <minimum-size width="80" height="80"/>
+                    <preferred-size width="80" height="80"/>
+                    <maximum-size width="80" height="80"/>
+                  </grid>
                 </constraints>
                 <properties>
                   <text value=""/>
@@ -186,9 +202,9 @@
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <minimum-size width="50" height="50"/>
-                <preferred-size width="50" height="50"/>
-                <maximum-size width="50" height="50"/>
+                <minimum-size width="80" height="80"/>
+                <preferred-size width="80" height="80"/>
+                <maximum-size width="80" height="80"/>
               </grid>
             </constraints>
             <properties/>
@@ -196,7 +212,11 @@
             <children>
               <component id="e4b06" class="javax.swing.JLabel" binding="map04">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                    <minimum-size width="80" height="80"/>
+                    <preferred-size width="80" height="80"/>
+                    <maximum-size width="80" height="80"/>
+                  </grid>
                 </constraints>
                 <properties>
                   <text value=""/>
@@ -208,9 +228,9 @@
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="0" column="5" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <minimum-size width="50" height="50"/>
-                <preferred-size width="50" height="50"/>
-                <maximum-size width="50" height="50"/>
+                <minimum-size width="80" height="80"/>
+                <preferred-size width="80" height="80"/>
+                <maximum-size width="80" height="80"/>
               </grid>
             </constraints>
             <properties/>
@@ -218,7 +238,11 @@
             <children>
               <component id="66564" class="javax.swing.JLabel" binding="map05">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                    <minimum-size width="80" height="80"/>
+                    <preferred-size width="80" height="80"/>
+                    <maximum-size width="80" height="80"/>
+                  </grid>
                 </constraints>
                 <properties>
                   <text value=""/>
@@ -230,9 +254,9 @@
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <minimum-size width="50" height="50"/>
-                <preferred-size width="50" height="50"/>
-                <maximum-size width="50" height="50"/>
+                <minimum-size width="80" height="80"/>
+                <preferred-size width="80" height="80"/>
+                <maximum-size width="80" height="80"/>
               </grid>
             </constraints>
             <properties/>
@@ -240,7 +264,11 @@
             <children>
               <component id="2a64e" class="javax.swing.JLabel" binding="map10">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                    <minimum-size width="80" height="80"/>
+                    <preferred-size width="80" height="80"/>
+                    <maximum-size width="80" height="80"/>
+                  </grid>
                 </constraints>
                 <properties>
                   <text value=""/>
@@ -252,9 +280,9 @@
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <minimum-size width="50" height="50"/>
-                <preferred-size width="50" height="50"/>
-                <maximum-size width="50" height="50"/>
+                <minimum-size width="80" height="80"/>
+                <preferred-size width="80" height="80"/>
+                <maximum-size width="80" height="80"/>
               </grid>
             </constraints>
             <properties/>
@@ -262,7 +290,11 @@
             <children>
               <component id="6a146" class="javax.swing.JLabel" binding="map11">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                    <minimum-size width="80" height="80"/>
+                    <preferred-size width="80" height="80"/>
+                    <maximum-size width="80" height="80"/>
+                  </grid>
                 </constraints>
                 <properties>
                   <text value=""/>
@@ -274,9 +306,9 @@
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <minimum-size width="50" height="50"/>
-                <preferred-size width="50" height="50"/>
-                <maximum-size width="50" height="50"/>
+                <minimum-size width="80" height="80"/>
+                <preferred-size width="80" height="80"/>
+                <maximum-size width="80" height="80"/>
               </grid>
             </constraints>
             <properties/>
@@ -284,7 +316,11 @@
             <children>
               <component id="f0646" class="javax.swing.JLabel" binding="map12">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                    <minimum-size width="80" height="80"/>
+                    <preferred-size width="80" height="80"/>
+                    <maximum-size width="80" height="80"/>
+                  </grid>
                 </constraints>
                 <properties>
                   <text value=""/>
@@ -296,9 +332,9 @@
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <minimum-size width="50" height="50"/>
-                <preferred-size width="50" height="50"/>
-                <maximum-size width="50" height="50"/>
+                <minimum-size width="80" height="80"/>
+                <preferred-size width="80" height="80"/>
+                <maximum-size width="80" height="80"/>
               </grid>
             </constraints>
             <properties/>
@@ -306,7 +342,11 @@
             <children>
               <component id="4236" class="javax.swing.JLabel" binding="map13">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                    <minimum-size width="80" height="80"/>
+                    <preferred-size width="80" height="80"/>
+                    <maximum-size width="80" height="80"/>
+                  </grid>
                 </constraints>
                 <properties>
                   <text value=""/>
@@ -318,9 +358,9 @@
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <minimum-size width="50" height="50"/>
-                <preferred-size width="50" height="50"/>
-                <maximum-size width="50" height="50"/>
+                <minimum-size width="80" height="80"/>
+                <preferred-size width="80" height="80"/>
+                <maximum-size width="80" height="80"/>
               </grid>
             </constraints>
             <properties/>
@@ -328,7 +368,11 @@
             <children>
               <component id="5d186" class="javax.swing.JLabel" binding="map14">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                    <minimum-size width="80" height="80"/>
+                    <preferred-size width="80" height="80"/>
+                    <maximum-size width="80" height="80"/>
+                  </grid>
                 </constraints>
                 <properties>
                   <text value=""/>
@@ -340,9 +384,9 @@
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="1" column="5" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <minimum-size width="50" height="50"/>
-                <preferred-size width="50" height="50"/>
-                <maximum-size width="50" height="50"/>
+                <minimum-size width="80" height="80"/>
+                <preferred-size width="80" height="80"/>
+                <maximum-size width="80" height="80"/>
               </grid>
             </constraints>
             <properties/>
@@ -350,7 +394,11 @@
             <children>
               <component id="e75fd" class="javax.swing.JLabel" binding="map15">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                    <minimum-size width="80" height="80"/>
+                    <preferred-size width="80" height="80"/>
+                    <maximum-size width="80" height="80"/>
+                  </grid>
                 </constraints>
                 <properties>
                   <text value=""/>
@@ -362,9 +410,9 @@
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <minimum-size width="50" height="50"/>
-                <preferred-size width="50" height="50"/>
-                <maximum-size width="50" height="50"/>
+                <minimum-size width="80" height="80"/>
+                <preferred-size width="80" height="80"/>
+                <maximum-size width="80" height="80"/>
               </grid>
             </constraints>
             <properties/>
@@ -372,7 +420,11 @@
             <children>
               <component id="4adf1" class="javax.swing.JLabel" binding="map20">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                    <minimum-size width="80" height="80"/>
+                    <preferred-size width="80" height="80"/>
+                    <maximum-size width="80" height="80"/>
+                  </grid>
                 </constraints>
                 <properties>
                   <text value=""/>
@@ -384,9 +436,9 @@
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <minimum-size width="50" height="50"/>
-                <preferred-size width="50" height="50"/>
-                <maximum-size width="50" height="50"/>
+                <minimum-size width="80" height="80"/>
+                <preferred-size width="80" height="80"/>
+                <maximum-size width="80" height="80"/>
               </grid>
             </constraints>
             <properties/>
@@ -394,7 +446,11 @@
             <children>
               <component id="7ecae" class="javax.swing.JLabel" binding="map21">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                    <minimum-size width="80" height="80"/>
+                    <preferred-size width="80" height="80"/>
+                    <maximum-size width="80" height="80"/>
+                  </grid>
                 </constraints>
                 <properties>
                   <text value=""/>
@@ -406,9 +462,9 @@
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <minimum-size width="50" height="50"/>
-                <preferred-size width="50" height="50"/>
-                <maximum-size width="50" height="50"/>
+                <minimum-size width="80" height="80"/>
+                <preferred-size width="80" height="80"/>
+                <maximum-size width="80" height="80"/>
               </grid>
             </constraints>
             <properties/>
@@ -416,7 +472,11 @@
             <children>
               <component id="d1bda" class="javax.swing.JLabel" binding="map22">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                    <minimum-size width="80" height="80"/>
+                    <preferred-size width="80" height="80"/>
+                    <maximum-size width="80" height="80"/>
+                  </grid>
                 </constraints>
                 <properties>
                   <text value=""/>
@@ -428,9 +488,9 @@
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <minimum-size width="50" height="50"/>
-                <preferred-size width="50" height="50"/>
-                <maximum-size width="50" height="50"/>
+                <minimum-size width="80" height="80"/>
+                <preferred-size width="80" height="80"/>
+                <maximum-size width="80" height="80"/>
               </grid>
             </constraints>
             <properties/>
@@ -438,7 +498,11 @@
             <children>
               <component id="76de7" class="javax.swing.JLabel" binding="map23">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                    <minimum-size width="80" height="80"/>
+                    <preferred-size width="80" height="80"/>
+                    <maximum-size width="80" height="80"/>
+                  </grid>
                 </constraints>
                 <properties>
                   <text value=""/>
@@ -450,9 +514,9 @@
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="2" column="4" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <minimum-size width="50" height="50"/>
-                <preferred-size width="50" height="50"/>
-                <maximum-size width="50" height="50"/>
+                <minimum-size width="80" height="80"/>
+                <preferred-size width="80" height="80"/>
+                <maximum-size width="80" height="80"/>
               </grid>
             </constraints>
             <properties/>
@@ -460,7 +524,11 @@
             <children>
               <component id="a5c28" class="javax.swing.JLabel" binding="map24">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                    <minimum-size width="80" height="80"/>
+                    <preferred-size width="80" height="80"/>
+                    <maximum-size width="80" height="80"/>
+                  </grid>
                 </constraints>
                 <properties>
                   <text value=""/>
@@ -472,9 +540,9 @@
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="2" column="5" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <minimum-size width="50" height="50"/>
-                <preferred-size width="50" height="50"/>
-                <maximum-size width="50" height="50"/>
+                <minimum-size width="80" height="80"/>
+                <preferred-size width="80" height="80"/>
+                <maximum-size width="80" height="80"/>
               </grid>
             </constraints>
             <properties/>
@@ -482,7 +550,11 @@
             <children>
               <component id="b4919" class="javax.swing.JLabel" binding="map25">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                    <minimum-size width="80" height="80"/>
+                    <preferred-size width="80" height="80"/>
+                    <maximum-size width="80" height="80"/>
+                  </grid>
                 </constraints>
                 <properties>
                   <text value=""/>
@@ -494,9 +566,9 @@
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <minimum-size width="50" height="50"/>
-                <preferred-size width="50" height="50"/>
-                <maximum-size width="50" height="50"/>
+                <minimum-size width="80" height="80"/>
+                <preferred-size width="80" height="80"/>
+                <maximum-size width="80" height="80"/>
               </grid>
             </constraints>
             <properties/>
@@ -504,7 +576,11 @@
             <children>
               <component id="c495f" class="javax.swing.JLabel" binding="map30">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                    <minimum-size width="80" height="80"/>
+                    <preferred-size width="80" height="80"/>
+                    <maximum-size width="80" height="80"/>
+                  </grid>
                 </constraints>
                 <properties>
                   <text value=""/>
@@ -516,9 +592,9 @@
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <minimum-size width="50" height="50"/>
-                <preferred-size width="50" height="50"/>
-                <maximum-size width="50" height="50"/>
+                <minimum-size width="80" height="80"/>
+                <preferred-size width="80" height="80"/>
+                <maximum-size width="80" height="80"/>
               </grid>
             </constraints>
             <properties/>
@@ -526,7 +602,11 @@
             <children>
               <component id="d33bc" class="javax.swing.JLabel" binding="map31">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                    <minimum-size width="80" height="80"/>
+                    <preferred-size width="80" height="80"/>
+                    <maximum-size width="80" height="80"/>
+                  </grid>
                 </constraints>
                 <properties>
                   <text value=""/>
@@ -538,9 +618,9 @@
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <minimum-size width="50" height="50"/>
-                <preferred-size width="50" height="50"/>
-                <maximum-size width="50" height="50"/>
+                <minimum-size width="80" height="80"/>
+                <preferred-size width="80" height="80"/>
+                <maximum-size width="80" height="80"/>
               </grid>
             </constraints>
             <properties/>
@@ -548,7 +628,11 @@
             <children>
               <component id="cfd3b" class="javax.swing.JLabel" binding="map32">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                    <minimum-size width="80" height="80"/>
+                    <preferred-size width="80" height="80"/>
+                    <maximum-size width="80" height="80"/>
+                  </grid>
                 </constraints>
                 <properties>
                   <text value=""/>
@@ -560,9 +644,9 @@
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <minimum-size width="50" height="50"/>
-                <preferred-size width="50" height="50"/>
-                <maximum-size width="50" height="50"/>
+                <minimum-size width="80" height="80"/>
+                <preferred-size width="80" height="80"/>
+                <maximum-size width="80" height="80"/>
               </grid>
             </constraints>
             <properties/>
@@ -570,7 +654,11 @@
             <children>
               <component id="df838" class="javax.swing.JLabel" binding="map33">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                    <minimum-size width="80" height="80"/>
+                    <preferred-size width="80" height="80"/>
+                    <maximum-size width="80" height="80"/>
+                  </grid>
                 </constraints>
                 <properties>
                   <text value=""/>
@@ -582,9 +670,9 @@
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="3" column="4" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <minimum-size width="50" height="50"/>
-                <preferred-size width="50" height="50"/>
-                <maximum-size width="50" height="50"/>
+                <minimum-size width="80" height="80"/>
+                <preferred-size width="80" height="80"/>
+                <maximum-size width="80" height="80"/>
               </grid>
             </constraints>
             <properties/>
@@ -592,7 +680,11 @@
             <children>
               <component id="3de29" class="javax.swing.JLabel" binding="map34">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                    <minimum-size width="80" height="80"/>
+                    <preferred-size width="80" height="80"/>
+                    <maximum-size width="80" height="80"/>
+                  </grid>
                 </constraints>
                 <properties>
                   <text value=""/>
@@ -604,9 +696,9 @@
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="3" column="5" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <minimum-size width="50" height="50"/>
-                <preferred-size width="50" height="50"/>
-                <maximum-size width="50" height="50"/>
+                <minimum-size width="80" height="80"/>
+                <preferred-size width="80" height="80"/>
+                <maximum-size width="80" height="80"/>
               </grid>
             </constraints>
             <properties/>
@@ -614,7 +706,11 @@
             <children>
               <component id="5a004" class="javax.swing.JLabel" binding="map35">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                    <minimum-size width="80" height="80"/>
+                    <preferred-size width="80" height="80"/>
+                    <maximum-size width="80" height="80"/>
+                  </grid>
                 </constraints>
                 <properties>
                   <text value=""/>
@@ -626,9 +722,9 @@
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <minimum-size width="50" height="50"/>
-                <preferred-size width="50" height="50"/>
-                <maximum-size width="50" height="50"/>
+                <minimum-size width="80" height="80"/>
+                <preferred-size width="80" height="80"/>
+                <maximum-size width="80" height="80"/>
               </grid>
             </constraints>
             <properties/>
@@ -636,7 +732,11 @@
             <children>
               <component id="ae300" class="javax.swing.JLabel" binding="map40">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                    <minimum-size width="80" height="80"/>
+                    <preferred-size width="80" height="80"/>
+                    <maximum-size width="80" height="80"/>
+                  </grid>
                 </constraints>
                 <properties>
                   <text value=""/>
@@ -648,9 +748,9 @@
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <minimum-size width="50" height="50"/>
-                <preferred-size width="50" height="50"/>
-                <maximum-size width="50" height="50"/>
+                <minimum-size width="80" height="80"/>
+                <preferred-size width="80" height="80"/>
+                <maximum-size width="80" height="80"/>
               </grid>
             </constraints>
             <properties/>
@@ -658,7 +758,11 @@
             <children>
               <component id="65bca" class="javax.swing.JLabel" binding="map41">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                    <minimum-size width="80" height="80"/>
+                    <preferred-size width="80" height="80"/>
+                    <maximum-size width="80" height="80"/>
+                  </grid>
                 </constraints>
                 <properties>
                   <text value=""/>
@@ -670,9 +774,9 @@
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <minimum-size width="50" height="50"/>
-                <preferred-size width="50" height="50"/>
-                <maximum-size width="50" height="50"/>
+                <minimum-size width="80" height="80"/>
+                <preferred-size width="80" height="80"/>
+                <maximum-size width="80" height="80"/>
               </grid>
             </constraints>
             <properties/>
@@ -680,7 +784,11 @@
             <children>
               <component id="8fbdf" class="javax.swing.JLabel" binding="map42">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                    <minimum-size width="80" height="80"/>
+                    <preferred-size width="80" height="80"/>
+                    <maximum-size width="80" height="80"/>
+                  </grid>
                 </constraints>
                 <properties>
                   <text value=""/>
@@ -692,9 +800,9 @@
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="4" column="3" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <minimum-size width="50" height="50"/>
-                <preferred-size width="50" height="50"/>
-                <maximum-size width="50" height="50"/>
+                <minimum-size width="80" height="80"/>
+                <preferred-size width="80" height="80"/>
+                <maximum-size width="80" height="80"/>
               </grid>
             </constraints>
             <properties/>
@@ -702,7 +810,11 @@
             <children>
               <component id="90cb0" class="javax.swing.JLabel" binding="map43">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                    <minimum-size width="80" height="80"/>
+                    <preferred-size width="80" height="80"/>
+                    <maximum-size width="80" height="80"/>
+                  </grid>
                 </constraints>
                 <properties>
                   <text value=""/>
@@ -714,9 +826,9 @@
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="4" column="4" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <minimum-size width="50" height="50"/>
-                <preferred-size width="50" height="50"/>
-                <maximum-size width="50" height="50"/>
+                <minimum-size width="80" height="80"/>
+                <preferred-size width="80" height="80"/>
+                <maximum-size width="80" height="80"/>
               </grid>
             </constraints>
             <properties/>
@@ -724,7 +836,11 @@
             <children>
               <component id="21f49" class="javax.swing.JLabel" binding="map44">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                    <minimum-size width="80" height="80"/>
+                    <preferred-size width="80" height="80"/>
+                    <maximum-size width="80" height="80"/>
+                  </grid>
                 </constraints>
                 <properties>
                   <text value=""/>
@@ -736,9 +852,9 @@
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="4" column="5" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <minimum-size width="50" height="50"/>
-                <preferred-size width="50" height="50"/>
-                <maximum-size width="50" height="50"/>
+                <minimum-size width="80" height="80"/>
+                <preferred-size width="80" height="80"/>
+                <maximum-size width="80" height="80"/>
               </grid>
             </constraints>
             <properties/>
@@ -746,7 +862,11 @@
             <children>
               <component id="5b0d4" class="javax.swing.JLabel" binding="map45">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                    <minimum-size width="80" height="80"/>
+                    <preferred-size width="80" height="80"/>
+                    <maximum-size width="80" height="80"/>
+                  </grid>
                 </constraints>
                 <properties>
                   <text value=""/>
@@ -758,9 +878,9 @@
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <minimum-size width="50" height="50"/>
-                <preferred-size width="50" height="50"/>
-                <maximum-size width="50" height="50"/>
+                <minimum-size width="80" height="80"/>
+                <preferred-size width="80" height="80"/>
+                <maximum-size width="80" height="80"/>
               </grid>
             </constraints>
             <properties/>
@@ -768,7 +888,11 @@
             <children>
               <component id="83e25" class="javax.swing.JLabel" binding="map50">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                    <minimum-size width="80" height="80"/>
+                    <preferred-size width="80" height="80"/>
+                    <maximum-size width="80" height="80"/>
+                  </grid>
                 </constraints>
                 <properties>
                   <text value=""/>
@@ -780,9 +904,9 @@
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <minimum-size width="50" height="50"/>
-                <preferred-size width="50" height="50"/>
-                <maximum-size width="50" height="50"/>
+                <minimum-size width="80" height="80"/>
+                <preferred-size width="80" height="80"/>
+                <maximum-size width="80" height="80"/>
               </grid>
             </constraints>
             <properties/>
@@ -790,7 +914,11 @@
             <children>
               <component id="ad878" class="javax.swing.JLabel" binding="map51">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                    <minimum-size width="80" height="80"/>
+                    <preferred-size width="80" height="80"/>
+                    <maximum-size width="80" height="80"/>
+                  </grid>
                 </constraints>
                 <properties>
                   <background color="-16777216"/>
@@ -803,9 +931,9 @@
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="5" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <minimum-size width="50" height="50"/>
-                <preferred-size width="50" height="50"/>
-                <maximum-size width="50" height="50"/>
+                <minimum-size width="80" height="80"/>
+                <preferred-size width="80" height="80"/>
+                <maximum-size width="80" height="80"/>
               </grid>
             </constraints>
             <properties/>
@@ -813,7 +941,11 @@
             <children>
               <component id="9a7bc" class="javax.swing.JLabel" binding="map52">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                    <minimum-size width="80" height="80"/>
+                    <preferred-size width="80" height="80"/>
+                    <maximum-size width="80" height="80"/>
+                  </grid>
                 </constraints>
                 <properties>
                   <text value=""/>
@@ -825,9 +957,9 @@
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="5" column="3" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <minimum-size width="50" height="50"/>
-                <preferred-size width="50" height="50"/>
-                <maximum-size width="50" height="50"/>
+                <minimum-size width="80" height="80"/>
+                <preferred-size width="80" height="80"/>
+                <maximum-size width="80" height="80"/>
               </grid>
             </constraints>
             <properties/>
@@ -835,7 +967,11 @@
             <children>
               <component id="da35e" class="javax.swing.JLabel" binding="map53">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                    <minimum-size width="80" height="80"/>
+                    <preferred-size width="80" height="80"/>
+                    <maximum-size width="80" height="80"/>
+                  </grid>
                 </constraints>
                 <properties>
                   <text value=""/>
@@ -847,9 +983,9 @@
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="5" column="4" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <minimum-size width="50" height="50"/>
-                <preferred-size width="50" height="50"/>
-                <maximum-size width="50" height="50"/>
+                <minimum-size width="80" height="80"/>
+                <preferred-size width="80" height="80"/>
+                <maximum-size width="80" height="80"/>
               </grid>
             </constraints>
             <properties/>
@@ -857,7 +993,11 @@
             <children>
               <component id="6c553" class="javax.swing.JLabel" binding="map54">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                    <minimum-size width="80" height="80"/>
+                    <preferred-size width="80" height="80"/>
+                    <maximum-size width="80" height="80"/>
+                  </grid>
                 </constraints>
                 <properties>
                   <text value=""/>
@@ -869,9 +1009,9 @@
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="5" column="5" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <minimum-size width="50" height="50"/>
-                <preferred-size width="50" height="50"/>
-                <maximum-size width="50" height="50"/>
+                <minimum-size width="80" height="80"/>
+                <preferred-size width="80" height="80"/>
+                <maximum-size width="80" height="80"/>
               </grid>
             </constraints>
             <properties/>
@@ -879,7 +1019,11 @@
             <children>
               <component id="d9483" class="javax.swing.JLabel" binding="map55">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                    <minimum-size width="80" height="80"/>
+                    <preferred-size width="80" height="80"/>
+                    <maximum-size width="80" height="80"/>
+                  </grid>
                 </constraints>
                 <properties>
                   <text value=""/>

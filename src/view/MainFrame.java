@@ -73,7 +73,11 @@ public class MainFrame extends JFrame implements KeyListener {
                 player.getCurrentLocation().setLocation(player.getCurrentLocation().getX(), player.getCurrentLocation().getY() - 1);
                 try {
                     controller.refreshMap(player.getCurrentLocation());
-                    combatEncounter();
+                    if(player.getCurrentLocation().getX() == 1 && player.getCurrentLocation().getY() == 5){
+                        bossEncounter();
+                    }else{
+                        combatEncounter();
+                    }
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
@@ -86,7 +90,11 @@ public class MainFrame extends JFrame implements KeyListener {
                 player.getCurrentLocation().setLocation(player.getCurrentLocation().getX(), player.getCurrentLocation().getY() + 1);
                 try {
                     controller.refreshMap(player.getCurrentLocation());
-                    combatEncounter();
+                    if(player.getCurrentLocation().getX() == 1 && player.getCurrentLocation().getY() == 5){
+                        bossEncounter();
+                    }else{
+                        combatEncounter();
+                    }
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
@@ -99,7 +107,11 @@ public class MainFrame extends JFrame implements KeyListener {
                 player.getCurrentLocation().setLocation(player.getCurrentLocation().getX() + 1, player.getCurrentLocation().getY());
                 try {
                     controller.refreshMap(player.getCurrentLocation());
-                    combatEncounter();
+                    if(player.getCurrentLocation().getX() == 1 && player.getCurrentLocation().getY() == 5){
+                        bossEncounter();
+                    }else{
+                        combatEncounter();
+                    }
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
@@ -112,7 +124,11 @@ public class MainFrame extends JFrame implements KeyListener {
                 player.getCurrentLocation().setLocation(player.getCurrentLocation().getX() - 1, player.getCurrentLocation().getY());
                 try {
                     controller.refreshMap(player.getCurrentLocation());
-                    combatEncounter();
+                    if(player.getCurrentLocation().getX() == 1 && player.getCurrentLocation().getY() == 5){
+                        bossEncounter();
+                    }else{
+                        combatEncounter();
+                    }
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
@@ -133,6 +149,21 @@ public class MainFrame extends JFrame implements KeyListener {
                 controller.setCurrentEnemy(enemies.get(random.nextInt(enemies.size())));
                 controller.combat(this, player, controller.getCurrentEnemy());
             }
+        }
+    }
+
+    public void bossEncounter() throws IOException {
+        if (player.isFirstBossDefeated() == false) {
+            System.out.println(player.isFirstBossDefeated());
+            Enemy boss = new Enemy("Dagobert Bácsi", 200, 15, 120, "./resources/volskath.png");
+            controller.setCurrentEnemy(boss);
+            controller.combat(this, player, controller.getCurrentEnemy());
+            //controller.getEnemies().remove(controller.getCurrentEnemy());
+            controller.clearMap(player.getCurrentLocation());
+            controller.refreshMap(player.getCurrentLocation());
+            player.setFirstBossDefeated(true);
+        }else{
+            combatEncounter();
         }
     }
 }

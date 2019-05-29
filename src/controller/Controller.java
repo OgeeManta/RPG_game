@@ -56,7 +56,7 @@ public class Controller{
 
     public void refreshMap(Point p) throws IOException {
         BufferedImage playerImage = ImageIO.read(new File("./resources/orc.png"));
-        Image playerImg = playerImage.getScaledInstance(display.getPortraitLabel().getWidth(), display.getPortraitLabel().getHeight(),
+        Image playerImg = playerImage.getScaledInstance(display.getMap00().getWidth(), display.getMap00().getHeight(),
                 Image.SCALE_SMOOTH);
         ImageIcon playerIcon = new ImageIcon(playerImg);
         map.getMap().get(p).setIcon(playerIcon);
@@ -74,6 +74,14 @@ public class Controller{
         frame.getContentPane().add(combatDisplay.getCombatRootPanel());
         frame.revalidate();
         frame.repaint();
+
+        frame.getRootPane().setDefaultButton(combatDisplay.getAttackButton());
+        combatDisplay.getAttackButton().requestFocus();
+
+        combatDisplay.getAttackButton().setEnabled(true);
+        combatDisplay.getSkillsButton().setEnabled(true);
+        combatDisplay.getItemsButton().setEnabled(true);
+        combatDisplay.getRunButton().setEnabled(true);
 
         BufferedImage playerImage = ImageIO.read(new File("./resources/orc.png"));
         Image playerImg = playerImage.getScaledInstance(combatDisplay.getPlayerPortraitLabel().getWidth(), combatDisplay.getPlayerPortraitLabel().getHeight(),
@@ -138,6 +146,15 @@ public class Controller{
         ImageIcon icon = new ImageIcon(img);
 
         button.setIcon(icon);
+    }
+
+    private void initIcon(String path,JLabel label) throws IOException {
+        BufferedImage Image = ImageIO.read(new File(path));
+        Image img = Image.getScaledInstance(label.getWidth(), label.getHeight(),
+                Image.SCALE_SMOOTH);
+        ImageIcon icon = new ImageIcon(img);
+
+        label.setIcon(icon);
     }
 
     public void initUnlockedIcon(String path,JButton button) throws IOException {
@@ -240,6 +257,20 @@ public class Controller{
 
     }
 
+    public void initMainLandMap() throws IOException {
+        Point volskath = new Point(1,5);
+        BufferedImage volskathImage = ImageIO.read(new File("./resources/icons/icon.3_55.png"));
+        Image volskathImg = volskathImage.getScaledInstance(display.getMap00().getWidth(), display.getMap00().getHeight(),
+                Image.SCALE_SMOOTH);
+        ImageIcon volskathIcon = new ImageIcon(volskathImg);
+
+        map.getMap().get(volskath).setIcon(volskathIcon);
+    }
+
+    public ArrayList<Enemy> getEnemies() {
+        return enemies;
+    }
+
     public void initComponents(JFrame frame) throws IOException {
 
         BufferedImage playerImage = ImageIO.read(new File("./resources/orc.png"));
@@ -248,6 +279,8 @@ public class Controller{
         ImageIcon playerIcon = new ImageIcon(playerImg);
 
         refreshMap(player.getCurrentLocation());
+
+        initMainLandMap();
 
         display.getPortraitLabel().setIcon(playerIcon);
 
@@ -294,7 +327,9 @@ public class Controller{
             @Override
             public void actionPerformed(ActionEvent e) {
                 clickedTalent(frame,1);
+                player.decreaseCrit(player.getTalents().get(1).getValue());
                 refreshTalentDisplay(talentDisplay.getOffenseButton00(),player.getTalents().get(1),1);
+                player.increaseCrit((player.getTalents().get(1).getValue()));
                 refreshTalentPoints();
                 try {
                     initOffenseTalents();
@@ -309,7 +344,9 @@ public class Controller{
             @Override
             public void actionPerformed(ActionEvent e) {
                 clickedTalent(frame,2);
+                player.decreaseFireDmg(player.getTalents().get(2).getValue());
                 refreshTalentDisplay(talentDisplay.getOffenseButton1(),player.getTalents().get(2),5);
+                player.increaseFireDmg(player.getTalents().get(2).getValue());
                 refreshTalentPoints();
                 try {
                     initOffenseTalents();
@@ -324,7 +361,9 @@ public class Controller{
             @Override
             public void actionPerformed(ActionEvent e) {
                 clickedTalent(frame,3);
+                player.decreasePoisonDmg(player.getTalents().get(3).getValue());
                 refreshTalentDisplay(talentDisplay.getOffenseButton01(),player.getTalents().get(3),3);
+                player.increasePoisonDmg(player.getTalents().get(3).getValue());
                 refreshTalentPoints();
                 try {
                     initOffenseTalents();
@@ -375,7 +414,7 @@ public class Controller{
         combatDisplay.getAttackButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(getCurrentEnemy().getHp() - player.getDmg() > 0){
+                if(getCurrentEnemy().getHp() - player.calculateDamage() > 0){
                     String output = player.attackEnemy(getCurrentEnemy());
                     combatDisplay.getCombatTextArea().setText(output);
                     combatDisplay.getPlayerStatsTextArea().setText(player.getStats());
@@ -383,11 +422,20 @@ public class Controller{
                 }else{
                     StringBuilder sb = new StringBuilder();
                     sb.append("You have defeated the enemy.\nYou received ");
-                    sb.append(getCurrentEnemy().getExpWorth() + " experience points.");
+                    sb.append(getCurrentEnemy().getExpWorth() + " experience points." + "\n");
                     combatDisplay.getCombatTextArea().setText(sb.toString());
                     player.setCurrExp(player.getCurrExp() + getCurrentEnemy().getExpWorth());
                     getCurrentEnemy().setHp(0);
+                    if(player.checkLevelUp()){
+                        sb.append("Congratulations you've leveled up!" + "\n");
+                        sb.append("You are now level: " + player.getLevel() + "\n");
+                        sb.append("You've gained a Talent Point.");
+                    }
                     combatDisplay.getEnemyStatsTextArea().setText(getCurrentEnemy().getStats());
+                    combatDisplay.getAttackButton().setEnabled(false);
+                    combatDisplay.getSkillsButton().setEnabled(false);
+                    combatDisplay.getItemsButton().setEnabled(false);
+                    combatDisplay.getRunButton().setEnabled(false);
                     combatDisplay.getEndCombatButton().setEnabled(true);
                 }
             }
@@ -398,13 +446,17 @@ public class Controller{
             public void actionPerformed(ActionEvent e) {
                 MainFrame.onMapDisplay = true;
                 enemies.remove(getCurrentEnemy());
-                enemies.add(tmpEnemy);
+                if(getCurrentEnemy().getName().equals("Dagobert Bácsi") == false) {
+                    enemies.add(tmpEnemy);
+                }
                 frame.getContentPane().remove(combatDisplay.getCombatRootPanel());
                 frame.getContentPane().add(display.getRootPanel());
                 frame.revalidate();
                 frame.repaint();
             }
         });
+
+
 
     }
 }

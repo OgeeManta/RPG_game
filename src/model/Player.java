@@ -1,7 +1,10 @@
 package model;
 
+import view.CombatDisplay;
+
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Player {
 
@@ -11,10 +14,16 @@ public class Player {
     private int exp;
     private double hp;
     private double dmg;
+    private double fireDmg;
+    private double poisonDmg;
+    private double crit;
+    private boolean critHit;
     private ArrayList<Talent> talents;
     private int talentPoints;
     private Point currentLocation;
     private boolean canCombat;
+
+    private boolean firstBossDefeated;
 
     public Player(String name){
         this.name = name;
@@ -23,24 +32,54 @@ public class Player {
         this.exp = 50;
         this.hp = 200;
         this.dmg = 2;
+        this.fireDmg = 0;
+        this.poisonDmg = 0;
+        this.crit = 0;
+        this.critHit = false;
         this.talents = new ArrayList<Talent>();
         this.talentPoints = 5;
         this.currentLocation = new Point(0,0);
         this.canCombat = true;
+        this.firstBossDefeated = false;
     }
 
     public String attackEnemy(Enemy enemy){
         StringBuilder sb = new StringBuilder();
-        sb.append("You hit the enemy for : ");
-        sb.append(getDmg());
+        Random r = new Random();
+        int result = r.nextInt(100);
+        if(result > crit) {
+            sb.append("You hit the enemy for : ");
+            sb.append(getDmg());
+            damageDisplay(enemy, sb);
+            enemy.setHp(enemy.getHp() - (int) calculateDamage());
+            setHp(getHp() - enemy.getDmg());
+        }else{
+            sb.append("You CRITICALLY hit the enemy for : ");
+            sb.append(getDmg()*2);
+            damageDisplay(enemy, sb);
+            enemy.setHp(enemy.getHp() - (int) calculateDamage()*2);
+            setHp(getHp() - enemy.getDmg());
+        }
+
+        return sb.toString();
+    }
+
+    public double calculateDamage(){
+        double damage = dmg + fireDmg + poisonDmg;
+        return damage;
+    }
+
+    private void damageDisplay(Enemy enemy, StringBuilder sb) {
         sb.append(" damage" + "\n");
+        if(fireDmg > 0){
+            sb.append("You also inflicted " + fireDmg + " fire damage\n");
+        }
+        if(poisonDmg > 0){
+            sb.append("The enemy also suffers " + poisonDmg + " poison damage\n");
+        }
         sb.append("The enemy retaliated for: ");
         sb.append(enemy.getDmg());
         sb.append(" damage" + "\n");
-        enemy.setHp(enemy.getHp() - (int)getDmg());
-        setHp(getHp() - enemy.getDmg());
-
-        return sb.toString();
     }
 
     public String getStats(){
@@ -49,18 +88,50 @@ public class Player {
 
         sb.append("Name: " + name + "\n" +
                 "Hp: " + hp + "\n" +
-                "Damage: " + dmg + "\n" +
-                "exp: " + currExp + "/" + exp + "\n" +
+                "Physical Damage: " + dmg + "\n" +
+                "Elemental Damage: " + "\n" +
+                "   -Fire: " + fireDmg + "\n" +
+                "   -Poison: " + poisonDmg + "\n" +
+                "Critical Hit Chance: " + crit + "%\n" +
+                "Experience Points: " + currExp + "/" + exp + "\n" +
                 "Talents: ");
         for(int i=0;i<talents.size();++i){
             if(talents.get(i).getLevel() != 0) {
-                sb.append("" + talents.get(i).getName() + "(" + talents.get(i).getLevel() + ") , ").toString();
+                sb.append("" + talents.get(i).getName() + "(" + talents.get(i).getLevel() + ")\n").toString();
             }
         }
 
         String string = sb.toString();
 
         return string;
+    }
+
+    public boolean checkLevelUp(){
+        if(currExp >= exp){
+            currExp = 0;
+            exp = exp + 100;
+            talentPoints = talentPoints + 1;
+            level = level + 1;
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public double getCrit() {
+        return crit;
+    }
+
+    public void setCrit(double crit) {
+        this.crit = crit;
+    }
+
+    public boolean isCritHit() {
+        return critHit;
+    }
+
+    public void setCritHit(boolean critHit) {
+        this.critHit = critHit;
     }
 
     public int getCurrExp() {
@@ -75,6 +146,14 @@ public class Player {
         return canCombat;
     }
 
+    public boolean isFirstBossDefeated() {
+        return firstBossDefeated;
+    }
+
+    public void setFirstBossDefeated(boolean firstBossDefeated) {
+        this.firstBossDefeated = firstBossDefeated;
+    }
+
     public void setCanCombat(boolean canCombat) {
         this.canCombat = canCombat;
     }
@@ -85,6 +164,30 @@ public class Player {
 
     public void spendTalentPoint(){
         talentPoints = talentPoints - 1;
+    }
+
+    public void increaseFireDmg(int damage){
+        fireDmg = fireDmg + damage;
+    }
+
+    public void decreaseFireDmg(int damage){
+        fireDmg = fireDmg - damage;
+    }
+
+    public void increasePoisonDmg(int damage){
+        poisonDmg = poisonDmg + damage;
+    }
+
+    public void decreasePoisonDmg(int damage){
+        poisonDmg = poisonDmg - damage;
+    }
+
+    public void increaseCrit(int critical){
+        crit = crit + critical;
+    }
+
+    public void decreaseCrit(int critical){
+        crit = crit - critical;
     }
 
     public void increaseDamage(int damage){

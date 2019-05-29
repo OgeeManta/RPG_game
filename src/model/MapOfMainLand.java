@@ -2,8 +2,12 @@ package model;
 
 import view.Display;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,7 +15,7 @@ public class MapOfMainLand{
 
     private Map<Point, JLabel> map = new HashMap<>();
 
-    public MapOfMainLand(Display display){
+    public MapOfMainLand(Display display) throws IOException {
         for(int i=0;i<6;++i){
             for(int j=0;j<6;++j){
                 Point tmp = new Point(i,j);
