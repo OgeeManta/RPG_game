@@ -2,8 +2,6 @@ package view;
 
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class Display{
     private JPanel rootPanel;
@@ -12,7 +10,7 @@ public class Display{
     private JPanel portrait;
     private JButton button3;
     private JButton button4;
-    private JButton button2;
+    private JButton skillsButton;
     private JLabel portraitLabel;
     private JLabel map00;
     private JLabel map01;
@@ -81,8 +79,8 @@ public class Display{
         return button4;
     }
 
-    public JButton getButton2() {
-        return button2;
+    public JButton getSkillsButton() {
+        return skillsButton;
     }
 
     public JLabel getPortraitLabel() {

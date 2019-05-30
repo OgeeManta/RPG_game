@@ -6,10 +6,7 @@ import view.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -23,21 +20,32 @@ public class Controller{
     private CombatDisplay combatDisplay;
     private TalentDisplay talentDisplay;
     private CharacterDisplay characterDisplay;
+    private SkillDisplay skillDisplay;
+    private EquipSkillDisplay equipSkillDisplay;
     private ArrayList<Enemy> enemies;
     private ArrayList<Talent> talents;
     private Enemy currentEnemy;
     private MapOfMainLand map;
     private Enemy tmpEnemy;
 
-    public Controller(Player player,ArrayList<Enemy> enemies,ArrayList<Talent> talents,Display display,CombatDisplay combatDisplay,TalentDisplay talentDisplay, CharacterDisplay characterDisplay, MapOfMainLand map){
+    private JFrame skillFrame = new JFrame("Skills");
+
+    public Controller(Player player,ArrayList<Enemy> enemies,ArrayList<Talent> talents,Display display,
+                      CombatDisplay combatDisplay,TalentDisplay talentDisplay, CharacterDisplay characterDisplay,
+                      SkillDisplay skillDisplay,EquipSkillDisplay equipSkillDisplay, MapOfMainLand map){
         this.player = player;
         this.talents = talents;
         this.display = display;
         this.combatDisplay = combatDisplay;
         this.talentDisplay = talentDisplay;
         this.characterDisplay = characterDisplay;
+        this.skillDisplay = skillDisplay;
+        this.equipSkillDisplay = equipSkillDisplay;
         this.enemies = enemies;
         this.map = map;
+        skillFrame.setSize(250,250);
+        skillFrame.add(skillDisplay.getSkillRootPanel());
+        skillFrame.setLocationRelativeTo(null);
     }
 
     public Enemy getCurrentEnemy() {
@@ -288,6 +296,7 @@ public class Controller{
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
+                    MainFrame.onMapDisplay = false;
                     showCharacterFrame(frame);
                 } catch (IOException ex) {
                     ex.printStackTrace();
@@ -299,6 +308,7 @@ public class Controller{
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
+                    MainFrame.onMapDisplay = false;
                     showTalentFrame(frame);
                 } catch (IOException ex) {
                     ex.printStackTrace();
@@ -411,6 +421,32 @@ public class Controller{
             }
         });
 
+        display.getSkillsButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MainFrame.onMapDisplay = false;
+
+                refreshSkills();
+                fillComboBoxes();
+
+                frame.getContentPane().remove(display.getRootPanel());
+                frame.getContentPane().add(equipSkillDisplay.getEquipSkillRootPanel());
+                frame.revalidate();
+                frame.repaint();
+            }
+        });
+
+        equipSkillDisplay.getBackButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MainFrame.onMapDisplay = true;
+                frame.getContentPane().remove(equipSkillDisplay.getEquipSkillRootPanel());
+                frame.getContentPane().add(display.getRootPanel());
+                frame.revalidate();
+                frame.repaint();
+            }
+        });
+
         combatDisplay.getAttackButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -420,23 +456,7 @@ public class Controller{
                     combatDisplay.getPlayerStatsTextArea().setText(player.getStats());
                     combatDisplay.getEnemyStatsTextArea().setText(getCurrentEnemy().getStats());
                 }else{
-                    StringBuilder sb = new StringBuilder();
-                    sb.append("You have defeated the enemy.\nYou received ");
-                    sb.append(getCurrentEnemy().getExpWorth() + " experience points." + "\n");
-                    combatDisplay.getCombatTextArea().setText(sb.toString());
-                    player.setCurrExp(player.getCurrExp() + getCurrentEnemy().getExpWorth());
-                    getCurrentEnemy().setHp(0);
-                    if(player.checkLevelUp()){
-                        sb.append("Congratulations you've leveled up!" + "\n");
-                        sb.append("You are now level: " + player.getLevel() + "\n");
-                        sb.append("You've gained a Talent Point.");
-                    }
-                    combatDisplay.getEnemyStatsTextArea().setText(getCurrentEnemy().getStats());
-                    combatDisplay.getAttackButton().setEnabled(false);
-                    combatDisplay.getSkillsButton().setEnabled(false);
-                    combatDisplay.getItemsButton().setEnabled(false);
-                    combatDisplay.getRunButton().setEnabled(false);
-                    combatDisplay.getEndCombatButton().setEnabled(true);
+                    buildString();
                 }
             }
         });
@@ -456,7 +476,180 @@ public class Controller{
             }
         });
 
+        combatDisplay.getSkillsButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                skillDisplay.getSkill_1Label().setText(player.getSkillSlot1().getName());
+                skillDisplay.getSkill_1().setText("Use (" + player.getSkillSlot1().getManaCost() + ")");
+                skillDisplay.getSkill_2Label().setText(player.getSkillSlot2().getName());
+                skillDisplay.getSkill_2().setText("Use (" + player.getSkillSlot2().getManaCost() + ")");
+                skillDisplay.getSkill_3Label().setText(player.getSkillSlot3().getName());
+                skillDisplay.getSkill_3().setText("Use (" + player.getSkillSlot3().getManaCost() + ")");
+                skillDisplay.getSkill_4Label().setText(player.getSkillSlot4().getName());
+                skillDisplay.getSkill_4().setText("Use (" + player.getSkillSlot4().getManaCost() + ")");
+                skillFrame.setVisible(true);
 
+            }
+        });
 
+        skillDisplay.getSkill_1().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(getCurrentEnemy().getHp() - player.getSkillSlot1().getDamage() > 0){
+                    String output = player.useSkill(getCurrentEnemy(),player.getSkillSlot1(),skillDisplay);
+                    combatDisplay.getCombatTextArea().setText(output);
+                    combatDisplay.getPlayerStatsTextArea().setText(player.getStats());
+                    combatDisplay.getEnemyStatsTextArea().setText(getCurrentEnemy().getStats());
+                }else{
+                    buildString();
+                }
+
+                skillFrame.setVisible(false);
+            }
+        });
+
+        skillDisplay.getSkill_2().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(getCurrentEnemy().getHp() - player.getSkillSlot2().getDamage() > 0){
+                    String output = player.useSkill(getCurrentEnemy(),player.getSkillSlot2(),skillDisplay);
+                    combatDisplay.getCombatTextArea().setText(output);
+                    combatDisplay.getPlayerStatsTextArea().setText(player.getStats());
+                    combatDisplay.getEnemyStatsTextArea().setText(getCurrentEnemy().getStats());
+                }else{
+                    buildString();
+                }
+
+                skillFrame.setVisible(false);
+            }
+        });
+        skillDisplay.getSkill_3().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(getCurrentEnemy().getHp() - player.getSkillSlot3().getDamage() > 0){
+                    String output = player.useSkill(getCurrentEnemy(),player.getSkillSlot3(),skillDisplay);
+                    combatDisplay.getCombatTextArea().setText(output);
+                    combatDisplay.getPlayerStatsTextArea().setText(player.getStats());
+                    combatDisplay.getEnemyStatsTextArea().setText(getCurrentEnemy().getStats());
+                }else{
+                    buildString();
+                }
+
+                skillFrame.setVisible(false);
+            }
+        });
+
+        skillDisplay.getSkill_4().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(getCurrentEnemy().getHp() - player.getSkillSlot4().getDamage() > 0){
+                    String output = player.useSkill(getCurrentEnemy(),player.getSkillSlot4(),skillDisplay);
+                    combatDisplay.getCombatTextArea().setText(output);
+                    combatDisplay.getPlayerStatsTextArea().setText(player.getStats());
+                    combatDisplay.getEnemyStatsTextArea().setText(getCurrentEnemy().getStats());
+                }else{
+                    buildString();
+                }
+
+                skillFrame.setVisible(false);
+            }
+        });
+
+    }
+
+    private void refreshSkills(){
+        equipSkillDisplay.getSkillSlot1Label().setText(player.getSkillSlot1().getName());
+        equipSkillDisplay.getSkillSlot2Label().setText(player.getSkillSlot2().getName());
+        equipSkillDisplay.getSkillSlot3Label().setText(player.getSkillSlot3().getName());
+        equipSkillDisplay.getSkillSlot4Label().setText(player.getSkillSlot4().getName());
+    }
+
+    private void fillComboBoxes(){
+        ArrayList<String> myList = new ArrayList<String>();
+        for(int i=0;i<player.getSkills().size();++i) {
+            myList.add(player.getSkills().get(i).getName());
+        }
+
+        equipSkillDisplay.getComboBox1().setModel(new javax.swing.DefaultComboBoxModel<>(myList.toArray()));
+        equipSkillDisplay.getComboBox1().setSelectedItem(null);
+        equipSkillDisplay.getComboBox2().setModel(new javax.swing.DefaultComboBoxModel<>(myList.toArray()));
+        equipSkillDisplay.getComboBox2().setSelectedItem(null);
+        equipSkillDisplay.getComboBox3().setModel(new javax.swing.DefaultComboBoxModel<>(myList.toArray()));
+        equipSkillDisplay.getComboBox3().setSelectedItem(null);
+        equipSkillDisplay.getComboBox4().setModel(new javax.swing.DefaultComboBoxModel<>(myList.toArray()));
+        equipSkillDisplay.getComboBox4().setSelectedItem(null);
+
+        equipSkillDisplay.getComboBox1().addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                Skill tmp = null;
+                for(int i=0;i<player.getSkills().size();++i){
+                    if(player.getSkills().get(i).getName().equals(e.getItem())){
+                        tmp = player.getSkills().get(i);
+                    }
+                }
+                equipSkillDisplay.getSkillSlot1Label().setText(tmp.getName());
+                player.setSkillSlot1(tmp);
+            }
+        });
+        equipSkillDisplay.getComboBox2().addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                Skill tmp = null;
+                for(int i=0;i<player.getSkills().size();++i){
+                    if(player.getSkills().get(i).getName().equals(e.getItem())){
+                        tmp = player.getSkills().get(i);
+                    }
+                }
+                equipSkillDisplay.getSkillSlot2Label().setText(tmp.getName());
+                player.setSkillSlot2(tmp);
+            }
+        });
+        equipSkillDisplay.getComboBox3().addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                Skill tmp = null;
+                for(int i=0;i<player.getSkills().size();++i){
+                    if(player.getSkills().get(i).getName().equals(e.getItem())){
+                        tmp = player.getSkills().get(i);
+                    }
+                }
+                equipSkillDisplay.getSkillSlot3Label().setText(tmp.getName());
+                player.setSkillSlot3(tmp);
+            }
+        });
+        equipSkillDisplay.getComboBox4().addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                Skill tmp = null;
+                for(int i=0;i<player.getSkills().size();++i){
+                    if(player.getSkills().get(i).getName().equals(e.getItem())){
+                        tmp = player.getSkills().get(i);
+                    }
+                }
+                equipSkillDisplay.getSkillSlot4Label().setText(tmp.getName());
+                player.setSkillSlot4(tmp);
+            }
+        });
+    }
+
+    private void buildString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("You have defeated the enemy.\nYou received ");
+        sb.append(getCurrentEnemy().getExpWorth() + " experience points." + "\n");
+        combatDisplay.getCombatTextArea().setText(sb.toString());
+        player.setCurrExp(player.getCurrExp() + getCurrentEnemy().getExpWorth());
+        getCurrentEnemy().setHp(0);
+        if(player.checkLevelUp()){
+            sb.append("Congratulations you've leveled up!" + "\n");
+            sb.append("You are now level: " + player.getLevel() + "\n");
+            sb.append("You've gained a Talent Point.");
+        }
+        combatDisplay.getEnemyStatsTextArea().setText(getCurrentEnemy().getStats());
+        combatDisplay.getAttackButton().setEnabled(false);
+        combatDisplay.getSkillsButton().setEnabled(false);
+        combatDisplay.getItemsButton().setEnabled(false);
+        combatDisplay.getRunButton().setEnabled(false);
+        combatDisplay.getEndCombatButton().setEnabled(true);
     }
 }
