@@ -7,6 +7,8 @@ public class Skill {
     private int healing;
     private int manaCost;
     private int level;
+    private int exp;
+    private int maxExp;
 
     public Skill(String name,int damage,int healing,int manaCost){
         this.name = name;
@@ -14,6 +16,24 @@ public class Skill {
         this. healing = healing;
         this.manaCost = manaCost;
         this.level = 1;
+        this.exp = 0;
+        this.maxExp = 5;
+    }
+
+    public int getExp() {
+        return exp;
+    }
+
+    public void setExp(int exp) {
+        this.exp = exp;
+    }
+
+    public int getMaxExp() {
+        return maxExp;
+    }
+
+    public void setMaxExp(int maxExp) {
+        this.maxExp = maxExp;
     }
 
     public int getLevel() {

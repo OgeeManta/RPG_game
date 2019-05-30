@@ -76,6 +76,7 @@ public class Player {
     public String useSkill(Enemy enemy, Skill skill, SkillDisplay skillDisplay){
         StringBuilder sb = new StringBuilder();
         if(mana >= skill.getManaCost()){
+            skill.setExp(skill.getExp() + 1);
             if(skill.getName().equals("Double Strike")) {
                 skillDisplay.getSkill_1().setToolTipText("You strike twice with your weapon dealing twice the amount of your overall damage to the target.");
                 skill.setDamage((int)calculateDamage() * 2);

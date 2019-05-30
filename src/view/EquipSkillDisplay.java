@@ -13,14 +13,49 @@ public class EquipSkillDisplay {
     private JLabel skillSlot4Label;
     private JPanel equipSkillRootPanel;
     private JButton backButton;
-    private JButton equipButton;
+    private JProgressBar progressBar1;
+    private JProgressBar progressBar2;
+    private JProgressBar progressBar3;
+    private JProgressBar progressBar4;
+    private JLabel skillStatLabel1;
+    private JLabel skillStatLabel2;
+    private JLabel skillStatLabel3;
+    private JLabel skillStatLabel4;
+
+    public JProgressBar getProgressBar1() {
+        return progressBar1;
+    }
+
+    public JProgressBar getProgressBar2() {
+        return progressBar2;
+    }
+
+    public JProgressBar getProgressBar3() {
+        return progressBar3;
+    }
+
+    public JProgressBar getProgressBar4() {
+        return progressBar4;
+    }
+
+    public JLabel getSkillStatLabel1() {
+        return skillStatLabel1;
+    }
+
+    public JLabel getSkillStatLabel2() {
+        return skillStatLabel2;
+    }
+
+    public JLabel getSkillStatLabel3() {
+        return skillStatLabel3;
+    }
+
+    public JLabel getSkillStatLabel4() {
+        return skillStatLabel4;
+    }
 
     public JComboBox getComboBox1() {
         return comboBox1;
-    }
-
-    public JButton getEquipButton() {
-        return equipButton;
     }
 
     public JComboBox getComboBox2() {

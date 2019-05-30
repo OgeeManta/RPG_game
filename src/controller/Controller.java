@@ -428,6 +428,7 @@ public class Controller{
 
                 refreshSkills();
                 fillComboBoxes();
+                fillProgressBars();
 
                 frame.getContentPane().remove(display.getRootPanel());
                 frame.getContentPane().add(equipSkillDisplay.getEquipSkillRootPanel());
@@ -562,6 +563,31 @@ public class Controller{
         equipSkillDisplay.getSkillSlot2Label().setText(player.getSkillSlot2().getName());
         equipSkillDisplay.getSkillSlot3Label().setText(player.getSkillSlot3().getName());
         equipSkillDisplay.getSkillSlot4Label().setText(player.getSkillSlot4().getName());
+    }
+
+    private void fillProgressBars(){
+        for(int i=0;i<player.getSkills().size();++i){
+            checkSkillLvlUp(player.getSkills().get(i));
+        }
+        equipSkillDisplay.getSkillStatLabel1().setText(player.getSkills().get(0).getName() + " Level: " + player.getSkills().get(0).getLevel());
+
+        equipSkillDisplay.getProgressBar1().setValue(player.getSkills().get(0).getExp());
+        equipSkillDisplay.getProgressBar1().setMaximum(player.getSkills().get(0).getMaxExp());
+        equipSkillDisplay.getSkillStatLabel2().setText(player.getSkills().get(1).getName());
+        equipSkillDisplay.getProgressBar2().setValue(player.getSkills().get(1).getExp());
+        /*
+        equipSkillDisplay.getSkillStatLabel3().setText(player.getSkills().get(2).getName());
+        equipSkillDisplay.getProgressBar3().setValue(player.getSkills().get(2).getExp());
+        equipSkillDisplay.getSkillStatLabel4().setText(player.getSkills().get(3).getName());
+        equipSkillDisplay.getProgressBar4().setValue(player.getSkills().get(3).getExp());
+         */
+    }
+
+    private void checkSkillLvlUp(Skill skill){
+        if(skill.getExp() >= skill.getMaxExp()){
+            skill.setLevel(skill.getLevel() + 1);
+            skill.setExp(0);
+        }
     }
 
     private void fillComboBoxes(){
