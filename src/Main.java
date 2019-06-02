@@ -20,6 +20,7 @@ public class Main {
         CharacterDisplay characterDisplay = new CharacterDisplay();
         SkillDisplay skillDisplay = new SkillDisplay();
         EquipSkillDisplay equipSkillDisplay = new EquipSkillDisplay();
+        InventoryDisplay inventoryDisplay = new InventoryDisplay();
         TalentTree talentTree = new TalentTree(talentDisplay);
         MapOfMainLand map = new MapOfMainLand(display);
         Player player = new Player("Dugovics");
@@ -31,7 +32,7 @@ public class Main {
         enemies.add(new HumanoidEnemy("Bandit",30,1,15,"./resources/thug.png"));
 
 
-        Controller controller = new Controller(player,enemies,talentTree.getTalentList(),display,combatDisplay,talentDisplay,characterDisplay,skillDisplay,equipSkillDisplay,map);
+        Controller controller = new Controller(player,enemies,talentTree.getTalentList(),display,combatDisplay,talentDisplay,characterDisplay,skillDisplay,equipSkillDisplay,inventoryDisplay,map);
         MainFrame frame = new MainFrame(controller,player,enemies,display,combatDisplay,characterDisplay,map);
         controller.initComponents(frame);
         controller.updateStats();

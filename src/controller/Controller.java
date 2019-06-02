@@ -11,6 +11,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Random;
 
 public class Controller{
@@ -22,6 +23,7 @@ public class Controller{
     private CharacterDisplay characterDisplay;
     private SkillDisplay skillDisplay;
     private EquipSkillDisplay equipSkillDisplay;
+    private InventoryDisplay inventoryDisplay;
     private ArrayList<Enemy> enemies;
     private ArrayList<Talent> talents;
     private Enemy currentEnemy;
@@ -32,7 +34,7 @@ public class Controller{
 
     public Controller(Player player,ArrayList<Enemy> enemies,ArrayList<Talent> talents,Display display,
                       CombatDisplay combatDisplay,TalentDisplay talentDisplay, CharacterDisplay characterDisplay,
-                      SkillDisplay skillDisplay,EquipSkillDisplay equipSkillDisplay, MapOfMainLand map){
+                      SkillDisplay skillDisplay,EquipSkillDisplay equipSkillDisplay,InventoryDisplay inventoryDisplay, MapOfMainLand map){
         this.player = player;
         this.talents = talents;
         this.display = display;
@@ -41,6 +43,7 @@ public class Controller{
         this.characterDisplay = characterDisplay;
         this.skillDisplay = skillDisplay;
         this.equipSkillDisplay = equipSkillDisplay;
+        this.inventoryDisplay = inventoryDisplay;
         this.enemies = enemies;
         this.map = map;
         skillFrame.setSize(250,250);
@@ -141,6 +144,16 @@ public class Controller{
         initOffenseTalents();
 
         turnOffButtonsIfNoPointsToSpend();
+
+
+
+    }
+
+    public void showInventoryFrame(JFrame frame){
+        frame.getContentPane().remove(display.getRootPanel());
+        frame.getContentPane().add(inventoryDisplay.getInventoryRootPanel());
+        frame.revalidate();
+        frame.repaint();
 
 
 
@@ -313,6 +326,14 @@ public class Controller{
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
+            }
+        });
+
+        display.getInventoryButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MainFrame.onMapDisplay = false;
+                showInventoryFrame(frame);
             }
         });
 

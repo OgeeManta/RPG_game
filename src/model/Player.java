@@ -3,8 +3,10 @@ package model;
 import view.CombatDisplay;
 import view.SkillDisplay;
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Random;
 
 public class Player {
@@ -22,6 +24,8 @@ public class Player {
     private boolean critHit;
     private ArrayList<Talent> talents;
     private ArrayList<Skill> skills;
+    private ArrayList<Item> items;
+    private Map<JButton,Item> inventory;
     private Skill skillSlot1;
     private Skill skillSlot2;
     private Skill skillSlot3;
@@ -46,6 +50,7 @@ public class Player {
         this.critHit = false;
         this.skills = new ArrayList<Skill>();
         this.talents = new ArrayList<Talent>();
+        this.items = new ArrayList<Item>();
         this.talentPoints = 5;
         this.currentLocation = new Point(0,0);
         this.canCombat = true;
@@ -133,6 +138,18 @@ public class Player {
         skillSlot2 = lesserHeal;
         skillSlot3 = empty;
         skillSlot4 = empty;
+    }
+
+    public void addItem(Item item){
+        items.add(item);
+    }
+
+    public void addItemToInventory(JButton button,Item item){
+        inventory.put(button,item);
+    }
+
+    public ArrayList<Item> getItems() {
+        return items;
     }
 
     public void addSkill(Skill skill){

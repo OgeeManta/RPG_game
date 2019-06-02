@@ -49,10 +49,15 @@ public class Display{
     private JLabel map54;
     private JLabel map55;
     private JPanel mapPanel;
+    private JButton inventoryButton;
 
 
     public Display() {
 
+    }
+
+    public JButton getInventoryButton() {
+        return inventoryButton;
     }
 
     public JPanel getRootPanel() {
