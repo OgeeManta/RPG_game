@@ -79,7 +79,7 @@ public class Player {
             skill.setExp(skill.getExp() + 1);
             if(skill.getName().equals("Double Strike")) {
                 skillDisplay.getSkill_1().setToolTipText("You strike twice with your weapon dealing twice the amount of your overall damage to the target.");
-                skill.setDamage((int)calculateDamage() * 2);
+                calculateDmgOfSkill(skill);
                 sb.append("You have used your ");
                 sb.append(skill.getName());
                 sb.append(" skill on the enemy.\n");
@@ -111,6 +111,16 @@ public class Player {
         }
 
         return sb.toString();
+    }
+
+    public double calculateDmgOfSkill(Skill skill){
+        double dmg = 0;
+        if(skill.getName().equals("Double Strike")){
+            dmg = (calculateDamage() * 2);
+            skill.setDamage((int)dmg);
+
+        }
+        return dmg;
     }
 
     public void initBasicSkills(){

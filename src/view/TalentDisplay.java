@@ -30,7 +30,6 @@ public class TalentDisplay {
     private JButton backButton;
 
     private void createUIComponents() {
-        // TODO: place custom component creation code here
     }
 
     public JButton getBackButton() {

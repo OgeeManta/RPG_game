@@ -496,7 +496,9 @@ public class Controller{
         skillDisplay.getSkill_1().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(getCurrentEnemy().getHp() - player.getSkillSlot1().getDamage() > 0){
+                System.out.println(getCurrentEnemy().getHp());
+                System.out.println(player.getSkillSlot1().getDamage());
+                if(getCurrentEnemy().getHp() - player.calculateDmgOfSkill(player.getSkillSlot1()) > 0){
                     String output = player.useSkill(getCurrentEnemy(),player.getSkillSlot1(),skillDisplay);
                     combatDisplay.getCombatTextArea().setText(output);
                     combatDisplay.getPlayerStatsTextArea().setText(player.getStats());
@@ -590,20 +592,58 @@ public class Controller{
         }
     }
 
+    private void disableComboBoxes(){
+        switch(player.getSkills().size()){
+            case 0: equipSkillDisplay.getComboBox1().setEnabled(false);
+                    equipSkillDisplay.getComboBox2().setEnabled(false);
+                    equipSkillDisplay.getComboBox3().setEnabled(false);
+                    equipSkillDisplay.getComboBox4().setEnabled(false);
+                    break;
+            case 1: equipSkillDisplay.getComboBox2().setEnabled(false);
+                    equipSkillDisplay.getComboBox3().setEnabled(false);
+                    equipSkillDisplay.getComboBox4().setEnabled(false);
+                    break;
+            case 2: equipSkillDisplay.getComboBox3().setEnabled(false);
+                    equipSkillDisplay.getComboBox4().setEnabled(false);
+                    break;
+            case 3: equipSkillDisplay.getComboBox4().setEnabled(false);
+                    break;
+        }
+    }
+
     private void fillComboBoxes(){
         ArrayList<String> myList = new ArrayList<String>();
+        String slot1 = "";
+        String slot2 = "";
+        String slot3 = "";
+        String slot4 = "";
         for(int i=0;i<player.getSkills().size();++i) {
             myList.add(player.getSkills().get(i).getName());
+            if(player.getSkills().get(i) == player.getSkillSlot1()){
+                slot1 = player.getSkills().get(i).getName();
+            }
+            if(player.getSkills().get(i) == player.getSkillSlot2()){
+                slot2 = player.getSkills().get(i).getName();
+            }
+            if(player.getSkills().get(i) == player.getSkillSlot3()){
+                slot3 = player.getSkills().get(i).getName();
+            }
+            if(player.getSkills().get(i) == player.getSkillSlot4()){
+                slot4 = player.getSkills().get(i).getName();
+            }
         }
 
         equipSkillDisplay.getComboBox1().setModel(new javax.swing.DefaultComboBoxModel<>(myList.toArray()));
-        equipSkillDisplay.getComboBox1().setSelectedItem(null);
+        equipSkillDisplay.getComboBox1().setSelectedItem(slot1);
         equipSkillDisplay.getComboBox2().setModel(new javax.swing.DefaultComboBoxModel<>(myList.toArray()));
-        equipSkillDisplay.getComboBox2().setSelectedItem(null);
+        equipSkillDisplay.getComboBox2().setSelectedItem(slot2);
         equipSkillDisplay.getComboBox3().setModel(new javax.swing.DefaultComboBoxModel<>(myList.toArray()));
-        equipSkillDisplay.getComboBox3().setSelectedItem(null);
+        equipSkillDisplay.getComboBox3().setSelectedItem(slot3);
         equipSkillDisplay.getComboBox4().setModel(new javax.swing.DefaultComboBoxModel<>(myList.toArray()));
-        equipSkillDisplay.getComboBox4().setSelectedItem(null);
+        equipSkillDisplay.getComboBox4().setSelectedItem(slot4);
+
+        disableComboBoxes();
+
 
         equipSkillDisplay.getComboBox1().addItemListener(new ItemListener() {
             @Override
