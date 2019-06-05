@@ -23,19 +23,22 @@ public class Main {
         InventoryDisplay inventoryDisplay = new InventoryDisplay();
         TalentTree talentTree = new TalentTree(talentDisplay);
         MapOfMainLand map = new MapOfMainLand(display);
+        ItemDatabase itemDatabase = new ItemDatabase();
         Player player = new Player("Dugovics");
         player.setTalents(talentTree.getTalentList());
         player.initBasicSkills();
 
         ArrayList<Enemy> enemies = new ArrayList<Enemy>();
-        enemies.add(new BeastEnemy("Goblin",25,2,10,"./resources/goblinWorker.png"));
-        enemies.add(new HumanoidEnemy("Bandit",30,1,15,"./resources/thug.png"));
+        enemies.add(new BeastEnemy("Goblin",25,2,10,"./resources/goblinWorker.png",false,itemDatabase.basicLootTable()));
+        enemies.add(new HumanoidEnemy("Bandit",30,1,15,"./resources/thug.png",false,itemDatabase.basicLootTable()));
 
 
         Controller controller = new Controller(player,enemies,talentTree.getTalentList(),display,combatDisplay,talentDisplay,characterDisplay,skillDisplay,equipSkillDisplay,inventoryDisplay,map);
-        MainFrame frame = new MainFrame(controller,player,enemies,display,combatDisplay,characterDisplay,map);
+        MainFrame frame = new MainFrame(controller,player,enemies,display,combatDisplay,characterDisplay,map,itemDatabase);
         controller.initComponents(frame);
         controller.updateStats();
+        player.initBasicItems(itemDatabase);
+
 
     }
 

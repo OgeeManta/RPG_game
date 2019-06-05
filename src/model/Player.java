@@ -1,20 +1,26 @@
 package model;
 
-import view.CombatDisplay;
 import view.SkillDisplay;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
 public class Player {
 
     private String name;
+    private int balance;
     private int level;
     private int currExp;
     private int exp;
+    private int maxInventorySize;
     private double hp;
     private double mana;
     private double dmg;
@@ -26,6 +32,7 @@ public class Player {
     private ArrayList<Skill> skills;
     private ArrayList<Item> items;
     private Map<JButton,Item> inventory;
+    private ArrayList <JButton> inventorySlots;
     private Skill skillSlot1;
     private Skill skillSlot2;
     private Skill skillSlot3;
@@ -36,8 +43,9 @@ public class Player {
 
     private boolean firstBossDefeated;
 
-    public Player(String name){
+    public Player(String name) throws IOException {
         this.name = name;
+        this.balance = 100;
         this.level = 1;
         this.currExp = 0;
         this.exp = 50;
@@ -47,10 +55,13 @@ public class Player {
         this.fireDmg = 0;
         this.poisonDmg = 0;
         this.crit = 0;
+        this.maxInventorySize = 5;
         this.critHit = false;
         this.skills = new ArrayList<Skill>();
         this.talents = new ArrayList<Talent>();
         this.items = new ArrayList<Item>();
+        this.inventorySlots = new ArrayList<JButton>();
+        this.inventory = new HashMap<>();
         this.talentPoints = 5;
         this.currentLocation = new Point(0,0);
         this.canCombat = true;
@@ -140,16 +151,60 @@ public class Player {
         skillSlot4 = empty;
     }
 
+    public Map<JButton, Item> getInventory() {
+        return inventory;
+    }
+
+    public ArrayList<JButton> getInventorySlots() {
+        return inventorySlots;
+    }
+
+    public void initBasicItems(ItemDatabase itemDatabase){
+        Item potion = new Consumable(itemDatabase.getPotion());
+        Item apple = new Consumable(itemDatabase.getApple());
+        addItemToInventory(potion);
+        addItemToInventory(apple);
+    }
+
+    private ImageIcon getIcon(String path) throws IOException {
+        BufferedImage Image = ImageIO.read(new File(path));
+        Image img = Image.getScaledInstance(50, 50,
+                Image.SCALE_SMOOTH);
+        ImageIcon icon = new ImageIcon(img);
+
+        return icon;
+    }
+
     public void addItem(Item item){
         items.add(item);
     }
 
-    public void addItemToInventory(JButton button,Item item){
-        inventory.put(button,item);
+    public void addItemToInventory(Item item){
+        int it = 0;
+        while(inventory.containsKey(inventorySlots.get(it))){
+            it++;
+        }
+        inventory.put(inventorySlots.get(it),item);
     }
 
     public ArrayList<Item> getItems() {
         return items;
+    }
+
+    public int getBalance() {
+        return balance;
+    }
+
+    public int getMaxInventorySize() {
+        return maxInventorySize;
+    }
+
+    public void setMaxInventorySize(int maxInventorySize) {
+        this.maxInventorySize = maxInventorySize;
+    }
+
+    public void changeBalance(int balance){
+        this.balance = this.balance + balance;
     }
 
     public void addSkill(Skill skill){

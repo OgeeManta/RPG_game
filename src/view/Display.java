@@ -6,7 +6,7 @@ import javax.swing.*;
 public class Display{
     private JPanel rootPanel;
     private JButton combatBtn;
-    private JTextArea stats;
+    private JTextArea encounterDetails;
     private JPanel portrait;
     private JButton button3;
     private JButton button4;
@@ -68,8 +68,8 @@ public class Display{
         return combatBtn;
     }
 
-    public JTextArea getStats() {
-        return stats;
+    public JTextArea getEncounterDetails() {
+        return encounterDetails;
     }
 
     public JPanel getPortrait() {

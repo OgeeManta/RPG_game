@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Enemy {
 
@@ -16,13 +17,17 @@ public class Enemy {
     private int hp;
     private int dmg;
     private int expWorth;
+    private ArrayList<Item> lootTable;
+    private boolean boss;
 
-    public Enemy(String name,int hp,int dmg,int expWorth,String iconPath) throws IOException {
+    public Enemy(String name,int hp,int dmg,int expWorth,String iconPath,boolean boss,ArrayList<Item> lootTable) throws IOException {
         this.name = name;
         this.hp = hp;
         this.dmg = dmg;
         this.expWorth = expWorth;
         this.iconPath = iconPath;
+        this.boss = boss;
+        this.lootTable = lootTable;
     }
 
     public Enemy(Enemy enemy){
@@ -31,6 +36,12 @@ public class Enemy {
         this.dmg = enemy.getDmg();
         this.expWorth = enemy.getExpWorth();
         this.iconPath = enemy.getIconPath();
+        this.boss = enemy.isBoss();
+        this.lootTable = enemy.getLootTable();
+    }
+
+    public boolean isBoss() {
+        return boss;
     }
 
     public String getStats(){
@@ -44,6 +55,14 @@ public class Enemy {
         String string = sb.toString();
 
         return string;
+    }
+
+    public ArrayList<Item> getLootTable() {
+        return lootTable;
+    }
+
+    public void setLootTable(ArrayList<Item> lootTable) {
+        this.lootTable = lootTable;
     }
 
     public String getIconPath() {

@@ -1,10 +1,7 @@
 package view;
 
 import controller.Controller;
-import model.Enemy;
-import model.MapOfMainLand;
-import model.Player;
-import model.Square;
+import model.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -25,6 +22,8 @@ public class MainFrame extends JFrame implements KeyListener {
     private CombatDisplay combatDisplay;
     private CharacterDisplay characterDisplay;
 
+    private ItemDatabase itemDatabase;
+
     public static boolean onMapDisplay;
 
     private Player player;
@@ -32,7 +31,7 @@ public class MainFrame extends JFrame implements KeyListener {
     private Controller controller;
     private ArrayList<Enemy> enemies;
 
-    public MainFrame(Controller controller, Player player, ArrayList<Enemy> enemies,Display display,CombatDisplay combatDisplay, CharacterDisplay characterDisplay,MapOfMainLand map) throws IOException {
+    public MainFrame(Controller controller, Player player, ArrayList<Enemy> enemies,Display display,CombatDisplay combatDisplay, CharacterDisplay characterDisplay,MapOfMainLand map,ItemDatabase itemDatabase) throws IOException {
         this.display = display;
         this.combatDisplay = combatDisplay;
         this.characterDisplay = characterDisplay;
@@ -40,6 +39,7 @@ public class MainFrame extends JFrame implements KeyListener {
         this.map = map;
         this.controller = controller;
         this.enemies = enemies;
+        this.itemDatabase = itemDatabase;
         this.onMapDisplay = true;
 
         addKeyListener(this);
@@ -52,7 +52,7 @@ public class MainFrame extends JFrame implements KeyListener {
         getContentPane().add(display.getRootPanel());
         setVisible(true);
 
-        display.getStats().setEditable(false);
+        display.getEncounterDetails().setEditable(false);
     }
 
 
@@ -67,7 +67,6 @@ public class MainFrame extends JFrame implements KeyListener {
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
         if(keyCode == KeyEvent.VK_LEFT){
-            System.out.println("Left key pressed!");
             if( player.getCurrentLocation().getY() != 0 && this.onMapDisplay == true) {
                 controller.clearMap(player.getCurrentLocation());
                 player.getCurrentLocation().setLocation(player.getCurrentLocation().getX(), player.getCurrentLocation().getY() - 1);
@@ -84,7 +83,6 @@ public class MainFrame extends JFrame implements KeyListener {
             }
         }
         if(keyCode == KeyEvent.VK_RIGHT){
-            System.out.println("Right key pressed!");
             if(player.getCurrentLocation().getY() != 5 && this.onMapDisplay == true) {
                 controller.clearMap(player.getCurrentLocation());
                 player.getCurrentLocation().setLocation(player.getCurrentLocation().getX(), player.getCurrentLocation().getY() + 1);
@@ -101,7 +99,6 @@ public class MainFrame extends JFrame implements KeyListener {
             }
         }
         if(keyCode == KeyEvent.VK_DOWN){
-            System.out.println("Down key pressed!");
             if(player.getCurrentLocation().getX() != 5 && this.onMapDisplay == true) {
                 controller.clearMap(player.getCurrentLocation());
                 player.getCurrentLocation().setLocation(player.getCurrentLocation().getX() + 1, player.getCurrentLocation().getY());
@@ -118,7 +115,6 @@ public class MainFrame extends JFrame implements KeyListener {
             }
         }
         if(keyCode == KeyEvent.VK_UP){
-            System.out.println("Up key pressed!");
             if( player.getCurrentLocation().getX() != 0 && this.onMapDisplay == true) {
                 controller.clearMap(player.getCurrentLocation());
                 player.getCurrentLocation().setLocation(player.getCurrentLocation().getX() - 1, player.getCurrentLocation().getY());
@@ -155,7 +151,10 @@ public class MainFrame extends JFrame implements KeyListener {
     public void bossEncounter() throws IOException {
         if (player.isFirstBossDefeated() == false) {
             System.out.println(player.isFirstBossDefeated());
-            Enemy boss = new Enemy("Dagobert Bácsi", 200, 15, 120, "./resources/volskath.png");
+            Item axe = new Weapon(itemDatabase.getAxe());
+            ArrayList<Item> loot = new ArrayList<Item>();
+            loot.add(axe);
+            Enemy boss = new Enemy("Dagobert Bácsi", 200, 15, 120, "./resources/volskath.png",true,loot);
             controller.setCurrentEnemy(boss);
             controller.combat(this, player, controller.getCurrentEnemy());
             //controller.getEnemies().remove(controller.getCurrentEnemy());

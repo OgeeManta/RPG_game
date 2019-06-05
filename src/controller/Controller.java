@@ -4,6 +4,10 @@ import model.*;
 import view.*;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -11,6 +15,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Random;
 
@@ -34,7 +39,7 @@ public class Controller{
 
     public Controller(Player player,ArrayList<Enemy> enemies,ArrayList<Talent> talents,Display display,
                       CombatDisplay combatDisplay,TalentDisplay talentDisplay, CharacterDisplay characterDisplay,
-                      SkillDisplay skillDisplay,EquipSkillDisplay equipSkillDisplay,InventoryDisplay inventoryDisplay, MapOfMainLand map){
+                      SkillDisplay skillDisplay,EquipSkillDisplay equipSkillDisplay,InventoryDisplay inventoryDisplay, MapOfMainLand map) throws IOException {
         this.player = player;
         this.talents = talents;
         this.display = display;
@@ -46,9 +51,13 @@ public class Controller{
         this.inventoryDisplay = inventoryDisplay;
         this.enemies = enemies;
         this.map = map;
+
+        initInventoryMap();
+
         skillFrame.setSize(250,250);
         skillFrame.add(skillDisplay.getSkillRootPanel());
         skillFrame.setLocationRelativeTo(null);
+
     }
 
     public Enemy getCurrentEnemy() {
@@ -60,9 +69,7 @@ public class Controller{
     }
 
     public void updateStats(){
-        display.getStats().setText( "Name: " + player.getName() + "\n" +
-                                    "Level: " + player.getLevel()
-                                    );
+        display.getEncounterDetails().setText("");
     }
 
     public void refreshMap(Point p) throws IOException {
@@ -155,8 +162,62 @@ public class Controller{
         frame.revalidate();
         frame.repaint();
 
+        inventoryDisplay.getBalanceLabel().setText("Money: " + player.getBalance());
 
+        Iterator it = player.getInventory().entrySet().iterator();
 
+        while(it.hasNext()){
+            Map.Entry pair = (Map.Entry)it.next();
+            JButton key = (JButton)pair.getKey();
+            Item value = (Item)pair.getValue();
+            System.out.println(value.getName() + "\n");
+            key.setEnabled(true);
+            key.setIcon(value.getIcon());
+            key.setToolTipText(value.getToolTipText());
+            System.out.println(key.getActionListeners());
+            if(key.getActionListeners().length == 0) {
+                key.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (value.getType() == ItemType.CONSUMABLE) {
+                            Consumable consumable = (Consumable) value;
+                            player.setHp(player.getHp() + consumable.getHeal());
+                            JOptionPane.showMessageDialog(frame, "You have restored " + consumable.getHeal() + " hp");
+                            player.getInventory().remove(key);
+                            key.setIcon(null);
+                            key.setToolTipText(null);
+                            key.setEnabled(false);
+                            key.removeActionListener(this);
+                        }
+                    }
+                });
+            }
+
+        }
+
+    }
+
+    public void initInventoryMap(){
+        player.getInventorySlots().add(inventoryDisplay.getButton1());
+        player.getInventorySlots().add(inventoryDisplay.getButton2());
+        player.getInventorySlots().add(inventoryDisplay.getButton3());
+        player.getInventorySlots().add(inventoryDisplay.getButton4());
+        player.getInventorySlots().add(inventoryDisplay.getButton5());
+        player.getInventorySlots().add(inventoryDisplay.getButton6());
+        player.getInventorySlots().add(inventoryDisplay.getButton7());
+        player.getInventorySlots().add(inventoryDisplay.getButton8());
+        player.getInventorySlots().add(inventoryDisplay.getButton9());
+        player.getInventorySlots().add(inventoryDisplay.getButton10());
+        player.getInventorySlots().add(inventoryDisplay.getButton11());
+        player.getInventorySlots().add(inventoryDisplay.getButton12());
+        player.getInventorySlots().add(inventoryDisplay.getButton13());
+        player.getInventorySlots().add(inventoryDisplay.getButton14());
+        player.getInventorySlots().add(inventoryDisplay.getButton15());
+        player.getInventorySlots().add(inventoryDisplay.getButton16());
+        player.getInventorySlots().add(inventoryDisplay.getButton17());
+        player.getInventorySlots().add(inventoryDisplay.getButton18());
+        player.getInventorySlots().add(inventoryDisplay.getButton19());
+        player.getInventorySlots().add(inventoryDisplay.getButton20());
     }
 
     public void initIcon(String path,JButton button) throws IOException {
@@ -167,15 +228,6 @@ public class Controller{
         ImageIcon icon = new ImageIcon(img);
 
         button.setIcon(icon);
-    }
-
-    private void initIcon(String path,JLabel label) throws IOException {
-        BufferedImage Image = ImageIO.read(new File(path));
-        Image img = Image.getScaledInstance(label.getWidth(), label.getHeight(),
-                Image.SCALE_SMOOTH);
-        ImageIcon icon = new ImageIcon(img);
-
-        label.setIcon(icon);
     }
 
     public void initUnlockedIcon(String path,JButton button) throws IOException {
@@ -442,6 +494,17 @@ public class Controller{
             }
         });
 
+        inventoryDisplay.getBackButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MainFrame.onMapDisplay = true;
+                frame.getContentPane().remove(inventoryDisplay.getInventoryRootPanel());
+                frame.getContentPane().add(display.getRootPanel());
+                frame.revalidate();
+                frame.repaint();
+            }
+        });
+
         display.getSkillsButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -473,6 +536,7 @@ public class Controller{
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(getCurrentEnemy().getHp() - player.calculateDamage() > 0){
+                    playSound("./resources/sounds/jab.wav");
                     String output = player.attackEnemy(getCurrentEnemy());
                     combatDisplay.getCombatTextArea().setText(output);
                     combatDisplay.getPlayerStatsTextArea().setText(player.getStats());
@@ -483,12 +547,19 @@ public class Controller{
             }
         });
 
+        combatDisplay.getItemsButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
         combatDisplay.getEndCombatButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 MainFrame.onMapDisplay = true;
                 enemies.remove(getCurrentEnemy());
-                if(getCurrentEnemy().getName().equals("Dagobert Bácsi") == false) {
+                if(getCurrentEnemy().isBoss() == false) {
                     enemies.add(tmpEnemy);
                 }
                 frame.getContentPane().remove(combatDisplay.getCombatRootPanel());
@@ -721,22 +792,76 @@ public class Controller{
     }
 
     private void buildString() {
+        playSound("./resources/sounds/fanfare.wav");
         StringBuilder sb = new StringBuilder();
         sb.append("You have defeated the enemy.\nYou received ");
         sb.append(getCurrentEnemy().getExpWorth() + " experience points." + "\n");
-        combatDisplay.getCombatTextArea().setText(sb.toString());
         player.setCurrExp(player.getCurrExp() + getCurrentEnemy().getExpWorth());
         getCurrentEnemy().setHp(0);
+        if(Math.random() < 0.5 && !getCurrentEnemy().isBoss()) {
+            if(player.getInventory().size() < player.getMaxInventorySize()) {
+                Item loot = checkTypeOfLoot();
+                sb.append("Your loot: " + loot.getName() + "\n");
+                player.addItemToInventory(loot);
+            }else{
+                JOptionPane.showMessageDialog(skillFrame,"Your Inventory is full! You have to leave the loot behind.");
+            }
+        }else{
+            if(player.getInventory().size() < player.getMaxInventorySize()) {
+                Item loot = checkTypeOfLoot();
+                sb.append("Your loot: " + loot.getName() + "\n");
+                player.addItemToInventory(loot);
+            }else{
+                JOptionPane.showMessageDialog(skillFrame,"Your Inventory is full! You have to leave the loot behind.");
+            }
+        }
         if(player.checkLevelUp()){
             sb.append("Congratulations you've leveled up!" + "\n");
             sb.append("You are now level: " + player.getLevel() + "\n");
             sb.append("You've gained a Talent Point.");
         }
+
+        combatDisplay.getCombatTextArea().setText(sb.toString());
+
         combatDisplay.getEnemyStatsTextArea().setText(getCurrentEnemy().getStats());
         combatDisplay.getAttackButton().setEnabled(false);
         combatDisplay.getSkillsButton().setEnabled(false);
         combatDisplay.getItemsButton().setEnabled(false);
         combatDisplay.getRunButton().setEnabled(false);
         combatDisplay.getEndCombatButton().setEnabled(true);
+    }
+
+    private Item checkTypeOfLoot(){
+
+        Random random = new Random();
+
+        int rnd = random.nextInt(getCurrentEnemy().getLootTable().size());
+        Item loot;
+        if(getCurrentEnemy().getLootTable().get(rnd).getType() == ItemType.CONSUMABLE){
+            loot = new Consumable((Consumable) getCurrentEnemy().getLootTable().get(rnd));
+        }else if(getCurrentEnemy().getLootTable().get(rnd).getType() == ItemType.WEAPON){
+            loot = new Weapon((Weapon) getCurrentEnemy().getLootTable().get(rnd));
+        }else{
+            loot = new Item(getCurrentEnemy().getLootTable().get(rnd));
+        }
+
+        return loot;
+    }
+
+    private void playSound(String path){
+        File sound = new File(path);
+        try{
+            Clip clip = AudioSystem.getClip();
+            clip.open(AudioSystem.getAudioInputStream(sound));
+            clip.start();
+
+            //Thread.sleep(clip.getMicrosecondLength()/1000);
+        } catch (LineUnavailableException e) {
+            e.printStackTrace();
+        } catch (UnsupportedAudioFileException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
