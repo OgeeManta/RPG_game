@@ -78,6 +78,8 @@ public class Controller{
                 Image.SCALE_SMOOTH);
         ImageIcon playerIcon = new ImageIcon(playerImg);
         map.getMap().get(p).setIcon(playerIcon);
+
+        initMapIcon(5,2,"./resources/icons/Icon.2_14.png");
     }
 
     public void clearMap(Point p){
@@ -331,13 +333,19 @@ public class Controller{
     }
 
     public void initMainLandMap() throws IOException {
-        Point volskath = new Point(1,5);
-        BufferedImage volskathImage = ImageIO.read(new File("./resources/icons/icon.3_55.png"));
-        Image volskathImg = volskathImage.getScaledInstance(display.getMap00().getWidth(), display.getMap00().getHeight(),
-                Image.SCALE_SMOOTH);
-        ImageIcon volskathIcon = new ImageIcon(volskathImg);
+        initMapIcon(1,5,"./resources/icons/icon.3_55.png");
 
-        map.getMap().get(volskath).setIcon(volskathIcon);
+        initMapIcon(5,2,"./resources/icons/Icon.2_14.png");
+    }
+
+    public void initMapIcon(int x,int y,String path) throws IOException {
+        Point point = new Point(x,y);
+        BufferedImage Image = ImageIO.read(new File(path));
+        Image Img = Image.getScaledInstance(display.getMap00().getWidth(), display.getMap00().getHeight(),
+                Image.SCALE_SMOOTH);
+        ImageIcon Icon = new ImageIcon(Img);
+
+        map.getMap().get(point).setIcon(Icon);
     }
 
     public ArrayList<Enemy> getEnemies() {

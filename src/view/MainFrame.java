@@ -138,6 +138,10 @@ public class MainFrame extends JFrame implements KeyListener {
 
     }
 
+    public void shopEncounter(){
+
+    }
+
     public void combatEncounter() throws IOException {
         if(player.getCanCombat() == true){
             if(Math.random() < 0.3) {
@@ -157,7 +161,6 @@ public class MainFrame extends JFrame implements KeyListener {
             Enemy boss = new Enemy("Dagobert Bácsi", 200, 15, 120, "./resources/volskath.png",true,loot);
             controller.setCurrentEnemy(boss);
             controller.combat(this, player, controller.getCurrentEnemy());
-            //controller.getEnemies().remove(controller.getCurrentEnemy());
             controller.clearMap(player.getCurrentLocation());
             controller.refreshMap(player.getCurrentLocation());
             player.setFirstBossDefeated(true);
